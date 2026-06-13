@@ -20,4 +20,29 @@ class RutaController
 
         require_once __DIR__ . '/Views/recorrido.php';
     }
+
+    public function store(){
+        // Capturar los datos
+        $nombre_ruta = trim($_POST['nombre_ruta']);
+        $origen = trim($_POST['origen']);
+        $destino = trim($_POST['destino']);
+
+        // Aqui se valida
+        if(empty($nombre_ruta) || empty($origen) || empty($destino)){
+            die("Todos los campos son obligatorios");
+        }
+
+        //redirige al listado
+        header('Location: /Pruebas/BusGo/public/css/ruta');
+        exit;
+    }
+
+    public function create(){
+        require_once __DIR__ . '/Views/ruta/create.php';
+    }
+
+    public function edit(){
+        $id = $_GET['id'];
+        echo "Editando ruta ID: " . $id;
+    }
 }

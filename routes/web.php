@@ -23,5 +23,25 @@ return [
     '/ruta/verRecorrido' => [
         'controller' => 'RutaController',
         'method' => 'verRecorrido'
+    ],
+
+    '/ruta/create' => [
+        'controller' => 'RutaController',
+        'method' => 'create'
+    ],
+
+    '/css/ruta' => [
+        'controller' => 'RutaController',
+        'method' => 'index'
+    ],
+    
+    '/ruta/store' => [
+        'controller' => 'RutaController',
+        'method' => 'store'
+    ],
+
+    '/ruta/edit' => [
+        'controller' => 'RutaController',
+        'method' => 'edit'
     ]
 ];

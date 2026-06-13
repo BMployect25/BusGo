@@ -7,7 +7,13 @@
 
 <body>
     <h1>Lista de Rutas</h1>
-    <p><a href="/Pruebas/BusGo/public/css/">Volver al inicio</a></p>
+    <a href="/Pruebas/BusGo/public/css/">Volver al inicio</a>
+
+    <br><br>
+
+    <p><a href="/Pruebas/BusGo/public/css/ruta/create">
+        Nueva Ruta</a></p>
+
     <table border="1">
         <tr>
             <th>ID</th>
@@ -16,6 +22,7 @@
             <th>Destino</th>
             <th>Empresa</th>
             <TH>Recorrido</TH>
+            <th>Acciones</th>
         </tr>
 
         <?php foreach ($rutas as $ruta): ?>
@@ -31,6 +38,19 @@
             <a href="/Pruebas/BusGo/public/css/ruta/verRecorrido?id=<?= $ruta['id_ruta'] ?>">
                 Ver recorrido
             </a>
+        </td>
+        
+        <td>
+                <a href="/Pruebas/BusGo/public/css/ruta/edit?id=<?= $ruta['id_ruta'] ?>">
+                    Editar
+                </a>
+
+                |
+
+                <a href="/Pruebas/BusGo/public/css/ruta/delete?id=<?= $ruta['id_ruta'] ?>"
+                    onclick="return confirm('¿Desea eliminar esta ruta?')">
+                    Eliminar
+                </a>
         </td>
     
         </tr>
