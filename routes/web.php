@@ -20,28 +20,33 @@ return [
         'method' => 'index'
     ],
 
-    '/ruta/verRecorrido' => [
-        'controller' => 'RutaController',
-        'method' => 'verRecorrido'
-    ],
-
     '/ruta/create' => [
         'controller' => 'RutaController',
         'method' => 'create'
     ],
 
-    '/css/ruta' => [
-        'controller' => 'RutaController',
-        'method' => 'index'
-    ],
-    
     '/ruta/store' => [
         'controller' => 'RutaController',
         'method' => 'store'
     ],
 
-    '/ruta/edit' => [
+    '/ruta/created' => [
         'controller' => 'RutaController',
-        'method' => 'edit'
+        'method' => 'created'
+    ],
+
+    '/ruta/createRecorrido' => [
+        'controller' => 'RutaController',
+        'method' => 'createRecorrido'
+    ],
+
+    '/ruta/delete' => [
+        'controller' => 'RutaController',
+        'method' => 'delete'
+    ],
+
+    '/ruta/verRecorrido' => [
+        'controller' => 'RutaController',
+        'method' => 'verRecorrido'
     ]
 ];

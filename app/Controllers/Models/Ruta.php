@@ -34,34 +34,41 @@ class Ruta
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($nombre_ruta,$origen,$destino){
+    public function create($nombre_ruta, $origen, $destino, $id_empresa)
+    {
         $stmt = $this->db->prepare(
             "INSERT INTO rutas
             (
                 nombre_ruta,
                 origen,
-                destino            
+                destino,
+                id_empresa
             )
             values
             (
+                ?,
                 ?,
                 ?,
                 ?
             )"
         );
 
-        return $stmt->execute([
+        $success = $stmt->execute([
             $nombre_ruta,
             $origen,
-            $destino
+            $destino,
+            $id_empresa
         ]);
+
+        return $success ? $this->db->lastInsertId() : false;
     }
 
-    public function find($id_ruta){
-        $stmt = $this->db->prepare("select * from rutas where id = ?");
+    public function find($id_ruta)
+    {
+        $stmt = $this->db->prepare("select * from rutas where id_ruta = ?");
         $stmt->execute([$id_ruta]);
 
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function update($id_ruta, $nombre_ruta, $origen, $destino) {

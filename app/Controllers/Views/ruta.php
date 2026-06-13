@@ -7,12 +7,12 @@
 
 <body>
     <h1>Lista de Rutas</h1>
-    <a href="/Pruebas/BusGo/public/css/">Volver al inicio</a>
-
-    <br><br>
-
-    <p><a href="/Pruebas/BusGo/public/css/ruta/create">
-        Nueva Ruta</a></p>
+    <p>
+        |<a href="/Pruebas/BusGo/public/css/">Volver al inicio</a>
+    </p>
+    <p>
+        <a href="/Pruebas/BusGo/public/css/ruta/create"> Crear nueva ruta</a>
+    </p>
 
     <table border="1">
         <tr>
@@ -21,7 +21,7 @@
             <th>Origen</th>
             <th>Destino</th>
             <th>Empresa</th>
-            <TH>Recorrido</TH>
+            <th>Recorrido</th>
             <th>Acciones</th>
         </tr>
 
@@ -32,27 +32,17 @@
             <td><?= $ruta['origen'] ?></td>
             <td><?= $ruta['destino'] ?></td>
             <td><?= $ruta['id_empresa'] ?></td>
-
-
-        <td>
-            <a href="/Pruebas/BusGo/public/css/ruta/verRecorrido?id=<?= $ruta['id_ruta'] ?>">
-                Ver recorrido
-            </a>
-        </td>
-        
-        <td>
-                <a href="/Pruebas/BusGo/public/css/ruta/edit?id=<?= $ruta['id_ruta'] ?>">
-                    Editar
+            <td>
+                <a href="/Pruebas/BusGo/public/css/ruta/verRecorrido?id=<?= $ruta['id_ruta'] ?>">
+                    Ver recorrido
                 </a>
-
-                |
-
+            </td>
+            <td>
                 <a href="/Pruebas/BusGo/public/css/ruta/delete?id=<?= $ruta['id_ruta'] ?>"
-                    onclick="return confirm('¿Desea eliminar esta ruta?')">
+                   onclick="return confirm('seguro quieres eliminar la ruta');">
                     Eliminar
                 </a>
-        </td>
-    
+            </td>
         </tr>
         <?php endforeach; ?>
 

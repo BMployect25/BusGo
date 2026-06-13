@@ -1,5 +1,5 @@
 <h1>Rutas Busgo</h1>
-<a href="/rutas/create">
+<a href="/ruta/create">
     Nueva Ruta
 </a>
 

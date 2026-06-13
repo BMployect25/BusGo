@@ -1,6 +1,8 @@
 <h1>Nueva Ruta</h1>
 
-<form method="POST" action="/rutas/store">
+<form method="POST" action="/ruta/store">
+
+    <input type="hidden" name="id_empresa" value="1">
 
     <label>Nombre Ruta</label>
 
@@ -31,3 +33,10 @@
     </button>
 
 </form>
+
+<body>
+    <br><br>
+    <p>
+        |<a href="/Pruebas/BusGo/public/css/ruta">Volver a rutas</a>
+    </p>
+</body>

@@ -2,7 +2,7 @@
 
 <form
 method="POST"
-action="/rutas/store">
+action="/ruta/store">
 
 <input
 type="text"

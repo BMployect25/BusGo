@@ -12,6 +12,60 @@ class RutaController
         require_once __DIR__ . '/Views/ruta.php';
     }
 
+    public function create()
+    {
+        require_once __DIR__ . '/Views/rutas/create.php';
+    }
+
+    public function store()
+    {
+        $nombre_ruta = $_POST['nombre_ruta'] ?? '';
+        $origen = $_POST['origen'] ?? '';
+        $destino = $_POST['destino'] ?? '';
+        $id_empresa = $_POST['id_empresa'] ?? 1;
+
+        $rutaModel = new Ruta();
+        $rutaId = $rutaModel->create($nombre_ruta, $origen, $destino, $id_empresa);
+
+        if ($rutaId === false) {
+            header('Location: /Pruebas/BusGo/public/css/ruta');
+            exit;
+        }
+
+        header('Location: /Pruebas/BusGo/public/css/ruta/created?id=' . $rutaId);
+        exit;
+    }
+
+    public function created()
+    {
+        $idRuta = $_GET['id'] ?? null;
+
+        if (!$idRuta) {
+            header('Location: /Pruebas/BusGo/public/css/ruta');
+            exit;
+        }
+
+        $rutaModel = new Ruta();
+        $ruta = $rutaModel->find($idRuta);
+
+        require_once __DIR__ . '/Views/rutas/created.php';
+    }
+
+    public function createRecorrido()
+    {
+        $idRuta = $_GET['id'] ?? null;
+
+        if (!$idRuta) {
+            header('Location: /Pruebas/BusGo/public/css/ruta');
+            exit;
+        }
+
+        $rutaModel = new Ruta();
+        $ruta = $rutaModel->find($idRuta);
+
+        require_once __DIR__ . '/Views/rutas/createRecorrido.php';
+    }
+
     public function verRecorrido()
     {
         $idRuta = $_GET['id'];
@@ -21,28 +75,19 @@ class RutaController
         require_once __DIR__ . '/Views/recorrido.php';
     }
 
-    public function store(){
-        // Capturar los datos
-        $nombre_ruta = trim($_POST['nombre_ruta']);
-        $origen = trim($_POST['origen']);
-        $destino = trim($_POST['destino']);
+    public function delete()
+    {
+        $idRuta = $_GET['id'] ?? null;
 
-        // Aqui se valida
-        if(empty($nombre_ruta) || empty($origen) || empty($destino)){
-            die("Todos los campos son obligatorios");
+        if (!$idRuta) {
+            header('Location: /Pruebas/BusGo/public/css/ruta');
+            exit;
         }
 
-        //redirige al listado
+        $rutaModel = new Ruta();
+        $rutaModel->delete($idRuta);
+
         header('Location: /Pruebas/BusGo/public/css/ruta');
         exit;
-    }
-
-    public function create(){
-        require_once __DIR__ . '/Views/ruta/create.php';
-    }
-
-    public function edit(){
-        $id = $_GET['id'];
-        echo "Editando ruta ID: " . $id;
     }
 }
