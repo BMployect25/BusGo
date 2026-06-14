@@ -3,8 +3,8 @@
 //Permite guardar información del usuario mientras navega.
 session_start();
 
-require_once __DIR__ . '/../../config/config.php';
-$routes = require __DIR__ . '/../../routes/web.php';
+require_once __DIR__ . '/../config/config.php';
+$routes = require __DIR__ . '/../routes/web.php';
 
 /* Obtener URL actual */
 $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
@@ -23,7 +23,7 @@ if (array_key_exists($url, $routes)) {
     $controllerName = $routes[$url]['controller'];
     $methodName = $routes[$url]['method'];
 
-    require_once __DIR__ . "/../../app/Controllers/$controllerName.php";
+    require_once __DIR__ . "/../app/Controllers/$controllerName.php";
 
     $controller = new $controllerName();
 

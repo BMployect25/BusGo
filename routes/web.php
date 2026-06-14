@@ -10,6 +10,11 @@ return [
         'method' => 'login'
     ],
 
+    '/login/authenticate' => [
+        'controller' => 'AuthController',
+        'method' => 'authenticate'
+    ],
+
     '/usuarios' => [
         'controller' => 'UserController',
         'method' => 'index'
@@ -48,5 +53,15 @@ return [
     '/ruta/verRecorrido' => [
         'controller' => 'RutaController',
         'method' => 'verRecorrido'
+    ],
+    
+    '/usuarios/create' => [
+        'controller' => 'UserController',
+        'method' => 'create'
+    ],
+
+    '/usuarios/store' => [
+        'controller' => 'UserController',
+        'method' => 'store'
     ]
 ];

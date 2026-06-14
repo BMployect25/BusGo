@@ -9,7 +9,15 @@
 <body>
     <h1>Bienvenido a BusGo</h1>
     <p>Primera vista cargada correctamente</p>
-    <a href="login">Iniciar sesión</a>
+
+    <?php if($_SESSION['rol'] === 'admin'): ?>
+
+        <a href="/Pruebas/BusGo/public/usuarios/create">
+            Registrar Usuario
+        </a>
+
+    <?php endif; ?>
+
     <br><br>
     <a href="usuarios">Ver usuarios</a>
     <br><br>

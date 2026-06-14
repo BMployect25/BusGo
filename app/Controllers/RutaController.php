@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../Middleware/Role.php';
+require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/Models/Ruta.php';
 
 class RutaController
@@ -14,11 +16,15 @@ class RutaController
 
     public function create()
     {
+        Auth::check();
+        Role::admin();
         require_once __DIR__ . '/Views/rutas/create.php';
     }
 
     public function store()
     {
+        Auth::check();
+        Role::admin();
         $nombre_ruta = $_POST['nombre_ruta'] ?? '';
         $origen = $_POST['origen'] ?? '';
         $destino = $_POST['destino'] ?? '';
@@ -77,6 +83,8 @@ class RutaController
 
     public function delete()
     {
+        Auth::check();
+        Role::admin();
         $idRuta = $_GET['id'] ?? null;
 
         if (!$idRuta) {

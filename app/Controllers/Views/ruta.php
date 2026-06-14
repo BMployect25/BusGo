@@ -10,10 +10,13 @@
     <p>
         |<a href="/Pruebas/BusGo/public/css/">Volver al inicio</a>
     </p>
+<?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
     <p>
         <a href="/Pruebas/BusGo/public/css/ruta/create"> Crear nueva ruta</a>
     </p>
+<?php endif; ?>
 
+    <?php $rutas = $rutas ?? []; ?>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -38,15 +41,17 @@
                 </a>
             </td>
             <td>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
                 <a href="/Pruebas/BusGo/public/css/ruta/delete?id=<?= $ruta['id_ruta'] ?>"
                    onclick="return confirm('seguro quieres eliminar la ruta');">
                     Eliminar
                 </a>
+                <?php endif; ?>
             </td>
         </tr>
         <?php endforeach; ?>
 
     </table>
 </body>
-
 </html>
+
