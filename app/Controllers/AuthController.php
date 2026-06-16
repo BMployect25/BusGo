@@ -49,5 +49,14 @@ class AuthController
         header("Location: /Pruebas/BusGo/public/");
         exit;
     }
+
+    // Método para cerrar sesión
+    public function logout(){
+        // Limpia la sesión y redirige al login
+        session_unset();
+        session_destroy();
+        header("Location: /Pruebas/BusGo/public/login");
+        exit;
+    }
     
 }

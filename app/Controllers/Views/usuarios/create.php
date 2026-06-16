@@ -1,29 +1,52 @@
-<form method="POST" action="public/usuario/store">
+<form method="POST"
+      action="/Pruebas/BusGo/public/usuarios/store">
 
-    <label>Nombre</label>
-    <input type="text" name="nombre">
+    <br><input type="text"
+           name="nombre"
+           placeholder="Nombre">
+
+    <br><input type="text"
+           name="apellido"
+           placeholder="Apellido">
+
+    <br><input type="email"
+           name="correo"
+           placeholder="Correo">
+
+    <br><input type="password"
+           name="password"
+           placeholder="Contraseña">
+
+    <br><input type="text"
+           name="telefono"
+           placeholder="Teléfono">
 
     <br><br>
-    <label>Correo</label>
-    <input type="email" name="correo">
 
-    <br><br>
-
-    <label>Contraseña</label>
-    <input type="password" name="contrasena">
-
-    <br><br>
-
-    <label>Rol</label>
     <select name="rol">
-        <option value="usuario">Usuario</option>
-        <option value="admin">Administrador</option>
+
+        <option value="cliente">
+            Cliente
+        </option>
+
+        <option value="conductor">
+            Conductor
+        </option>
+
+        <option value="admin">
+            Administrador
+        </option>
+
     </select>
 
     <br><br>
 
-    <button type="submit">Crear Usuario</button>
 </form>
+
+<button type="submit">
+        Crear Usuario
+</button>
+
 <body>
     <p>
         <br><br>

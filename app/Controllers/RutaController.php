@@ -6,6 +6,8 @@ require_once __DIR__ . '/Models/Ruta.php';
 
 class RutaController
 {
+    private $rutaModel;
+
     public function index()
     {
         $rutaModel = new Ruta();
@@ -97,5 +99,11 @@ class RutaController
 
         header('Location: /Pruebas/BusGo/public/css/ruta');
         exit;
+    }
+
+    // Constructor para asegurar que el usuario esté autenticado antes de acceder a cualquier método
+    public function __construct(){
+        Auth::check();
+        $this->rutaModel = new Ruta();
     }
 }
