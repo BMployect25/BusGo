@@ -5,24 +5,48 @@
     <title>Crear recorrido</title>
 </head>
 <body>
-    <h1>Crear recorrido para la ruta</h1>
+    <h1>Agregar Parada al Recorrido</h1>
 
-    <?php if (!empty($ruta)): ?>
-        <p><strong>Ruta:</strong> <?= htmlspecialchars($ruta['nombre_ruta']) ?></p>
-        <p><strong>Origen:</strong> <?= htmlspecialchars($ruta['origen']) ?></p>
-        <p><strong>Destino:</strong> <?= htmlspecialchars($ruta['destino']) ?></p>
-    <?php endif; ?>
+    <form method="POST"
+    action="/Pruebas/BusGo/public/ruta/storeRecorrido">
 
-    <p>
-        Aquí puedes comenzar a guardar el recorrido completo de la ruta.
-    </p>
+    <input type="hidden" name="id_ruta" value="<?= $idRuta ?>">
 
-    <p>
-        <em>Esta pantalla es el punto de partida para agregar paradas y orden de recorrido.</em>
-    </p>
+    <label>Parada</label>
 
-    <p>
-        <a href="/Pruebas/BusGo/public/css/ruta">Volver a la lista de rutas</a>
-    </p>
+    <select name="id_parada">
+
+    <?php foreach($paradas as $parada): ?>
+
+    <option value="<?= $parada['id_parada'] ?>">
+
+    <?= $parada['nombre_parada'] ?>
+
+    </option>
+
+    <?php endforeach; ?>
+
+    </select>
+
+    <br><br>
+
+    <label>Orden del recorrido</label>
+
+    <input type="number" name="orden_recorrido" required>
+
+    <br><br>
+
+    <button>
+        Guardar
+    </button>
+
+    </form>
+
+    <br><br>   
+    
+     <a href="javascript:history.back()" class="btn-volver">
+            Volver a Recorridos
+    </a>
+
 </body>
 </html>

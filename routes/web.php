@@ -1,5 +1,8 @@
 <?php
 return [
+
+    //login
+
     '/' => [
         'controller' => 'HomeController',
         'method' => 'index'
@@ -20,6 +23,8 @@ return [
         'method' => 'logout'
     ],
     
+    //usuarios
+
     '/usuarios' => [
         'controller' => 'UserController',
         'method' => 'index'
@@ -49,6 +54,8 @@ return [
         'controller' => 'UserController',
         'method' => 'delete'
     ],
+
+    //ruta
 
     '/ruta' => [
         'controller' => 'RutaController',
@@ -80,10 +87,42 @@ return [
         'method' => 'delete'
     ],
 
+    '/ruta/edit' => [
+        'controller' => 'RutaController',
+        'method' => 'edit'
+    ],
+
+    '/ruta/update' => [
+        'controller' => 'RutaController',
+        'method' => 'update'
+    ],
+
     '/ruta/verRecorrido' => [
         'controller' => 'RutaController',
         'method' => 'verRecorrido'
     ],
+
+    '/ruta/storeRecorrido' => [
+        'controller' => 'RutaController',
+        'method' => 'storeRecorrido'
+    ],
+
+    '/ruta/deleteRecorrido' => [
+        'controller' => 'RutaController',
+        'method' => 'deleteRecorrido'
+    ],
+
+    '/ruta/editRecorrido' => [
+        'controller' => 'RutaController',
+        'method' => 'editRecorrido'
+    ],
+
+    '/ruta/updateRecorrido' => [
+        'controller' => 'RutaController',
+        'method' => 'updateRecorrido'
+    ],
+
+    //empresas
 
     '/empresas' => [
         'controller' => 'EmpresaController',
@@ -112,6 +151,122 @@ return [
 
     '/empresas/delete' => [
         'controller' => 'EmpresaController',
+        'method' => 'delete'
+    ],
+
+    //paradas
+
+    '/paradas' => [
+        'controller' => 'ParadaController',
+        'method' => 'index'
+    ],
+
+    '/paradas/create' => [
+        'controller' => 'ParadaController',
+        'method' => 'create'
+    ],
+
+    '/paradas/store' => [
+        'controller' => 'ParadaController',
+        'method' => 'store'
+    ],
+
+    '/paradas/edit' => [
+        'controller' => 'ParadaController',
+        'method' => 'edit'
+    ],
+
+    '/paradas/update' => [
+        'controller' => 'ParadaController',
+        'method' => 'update'
+    ],
+
+    '/paradas/delete' => [
+        'controller' => 'ParadaController',
+        'method' => 'delete'
+    ],
+
+    //conductores
+
+    '/conductores' => [
+        'controller'=>'ConductoresController',
+    '   method'=>'index'
+    ],
+
+    '/conductores/create' => [
+        'controller'=>'ConductoresController',
+        'method'=>'create'
+    ],
+
+    '/conductores/store' => [
+        'controller'=>'ConductoresController',
+        'method'=>'store'
+    ],
+
+    '/conductores/edit' => [
+        'controller'=>'ConductoresController',
+        'method'=>'edit'
+    ],
+
+    '/conductores/update' => [
+        'controller'=>'ConductoresController',
+        'method'=>'update'
+    ],
+
+    '/conductores/delete' => [
+        'controller'=>'ConductoresController',
+        'method'=>'delete'
+    ],
+
+    //vehiculos
+
+    '/vehiculos' => [
+        'controller' => 'VehiculosController',
+        'method' => 'index'
+    ],
+
+    '/vehiculos/create' => [
+        'controller' => 'VehiculosController',
+        'method' => 'create'
+    ],
+
+    '/vehiculos/store' => [
+        'controller' => 'VehiculosController',
+        'method' => 'store'
+    ],
+
+    '/vehiculos/edit' => [
+        'controller' => 'VehiculosController',
+        'method' => 'edit'
+    ],
+
+    '/vehiculos/update' => [
+        'controller' => 'VehiculosController',
+        'method' => 'update'
+    ],
+
+    '/vehiculos/delete' => [
+        'controller' => 'VehiculosController',
+        'method' => 'delete'
+    ],
+
+    '/vehiculo_rutas' => [
+        'controller' => 'VehiculoRutaController',
+        'method' => 'index'
+    ],
+
+    '/vehiculo_rutas/create' => [
+        'controller' => 'VehiculoRutaController',
+        'method' => 'create'
+    ],
+
+    '/vehiculo_rutas/store' => [
+        'controller' => 'VehiculoRutaController',
+        'method' => 'store'
+    ],
+
+    '/vehiculo_rutas/delete' => [
+        'controller' => 'VehiculoRutaController',
         'method' => 'delete'
     ]
 ];

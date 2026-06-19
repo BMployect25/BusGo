@@ -19,7 +19,7 @@ class EmpresaController{
         Auth::check();
         Role::admin();
 
-        require_once __DIR__ . '/Views/create_empresa.php';
+        require_once __DIR__ . '/Views/empresas/create.php';
     }
 
     public function store(){
@@ -38,25 +38,18 @@ class EmpresaController{
         exit;
     }
 
+    // Método para mostrar el formulario de edición
     public function edit(){
         Auth::check();
         Role::admin();
 
-        $id = $_GET['id'] ?? null;
-        if (!$id) {
-            header("Location: /Pruebas/BusGo/public/empresas");
-            exit;
-        }
+        require_once __DIR__ . '/Models/Empresa.php';
 
         $empresaModel = new Empresa();
-        $empresa = $empresaModel->find($id);
 
-        if (!$empresa) {
-            header("Location: /Pruebas/BusGo/public/empresas");
-            exit;
-        }
+        $empresas = $empresaModel->getAll();
 
-        require_once __DIR__ . '/Views/empresas/edit.php';
+        require_once __DIR__ . '/Views/create.php';
     }
 
     public function update(){

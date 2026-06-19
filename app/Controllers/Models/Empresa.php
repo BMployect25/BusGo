@@ -15,8 +15,11 @@ class Empresa{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($nombre,$nit,$telefono,$correo){
-        $stmt = $this->db->prepare(("INSERT INTO empresas (nombre, nit, telefono, correo) VALUES (?, ?, ?, ?)") );
+    public function create($nombre, $nit, $telefono, $correo){
+        $stmt = $this->db->prepare(
+            "INSERT INTO empresas (nombre, nit, telefono, correo) VALUES (?, ?, ?, ?)"
+        );
+
         return $stmt->execute([$nombre, $nit, $telefono, $correo]);
     }
 

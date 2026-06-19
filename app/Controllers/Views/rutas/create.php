@@ -28,6 +28,23 @@
 
     <br><br>
 
+    <label>Empresa</label>
+
+    <select name="id_empresa">
+
+    <?php foreach($empresas as $empresa): ?>
+
+    <option value="<?= $empresa['id_empresa'] ?>"> 
+    <?= $empresa['nombre'] ?>
+
+    </option>
+
+<?php endforeach; ?>
+
+</select>
+
+    <br><br>
+
     <button type="submit">
         Guardar
     </button>

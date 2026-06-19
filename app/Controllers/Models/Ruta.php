@@ -71,25 +71,25 @@ class Ruta
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id_ruta, $nombre_ruta, $origen, $destino) {
+    public function update($id_ruta, $nombre_ruta, $origen, $destino, $id_empresa) {
         $stmt =
         $this->db->prepare(
         "UPDATE rutas SET
-         nombre_ruta=?,
-         origen=?,
-         destino=?
-
-         WHERE id=?"
+         nombre_ruta = ?,
+         origen = ?,
+         destino = ?,
+         id_empresa = ?
+         WHERE id_ruta = ?"
         );
     
-        return $stmt->execute([$nombre_ruta, $origen, $destino, $id_ruta]);
+        return $stmt->execute([$nombre_ruta, $origen, $destino, $id_empresa, $id_ruta]);
     }
 
     public function delete($id) {
         $stmt =
         $this->db->prepare(
 
-        "DELETE FROM rutas WHERE id=?"
+        "DELETE FROM rutas WHERE id_ruta=?"
         );
 
         return $stmt->execute([ $id ]);

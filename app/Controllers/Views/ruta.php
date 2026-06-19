@@ -42,6 +42,11 @@
             </td>
             <td>
                 <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+
+                <a href="/Pruebas/BusGo/public/css/ruta/edit?id=<?= $ruta['id_ruta'] ?>">
+                    Editar
+                </a>
+                |
                 <a href="/Pruebas/BusGo/public/css/ruta/delete?id=<?= $ruta['id_ruta'] ?>"
                    onclick="return confirm('seguro quieres eliminar la ruta');">
                     Eliminar
@@ -54,4 +59,3 @@
     </table>
 </body>
 </html>
-
