@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/Models/Vehiculo.php';
+require_once __DIR__ . '/Models/Empresa.php';
+require_once __DIR__ . '/Models/Conductor.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
@@ -10,8 +12,9 @@ class VehiculosController{
         Auth::check();
         Role::admin();
 
-        $vehiculoModel = new Parada();
-        $paradas = $vehiculoModel->getAll();
+        $vehiculoModel = new Vehiculo();
+        $vehiculos = $vehiculoModel->getAll();
+
         require_once __DIR__ . '/Views/vehiculos.php';
     }
 
@@ -19,17 +22,36 @@ class VehiculosController{
         Auth::check();
         Role::admin();
 
-        require_once __DIR__ . '/Views/vehiculo/create.php';
+        $empresaModel = new Empresa();
+        $conductorModel = new Conductor();
+
+        $empresas = $empresaModel->getAll();
+        $conductores = $conductorModel->getAll();
+
+        require_once __DIR__ . '/Views/vehiculos/create.php';
     }
 
     public function store(){
         Auth::check();
         Role::admin();
 
-        $nombre = trim($_POST['id_vehiculo']);
-        $paradaModel = new Parada();
-        $paradaModel->create($nombre);
-        header('Location: /Pruebas/BusGo/public/vehiculo');
+        $placa = trim($_POST['placa']);
+        $modelo = trim($_POST['modelo']);
+        $capacidad = trim($_POST['capacidad']);
+        $idEmpresa = $_POST['id_empresa'];
+        $idConductor = $_POST['id_conductor'];
+
+        $vehiculoModel = new Vehiculo();
+        $vehiculoModel->create(
+            $placa,
+            $modelo,
+            $capacidad,
+            $idEmpresa,
+            $idConductor
+        );
+
+        header('Location: /Pruebas/BusGo/public/vehiculos');
+        exit;
     }
 
     public function edit(){
@@ -38,21 +60,33 @@ class VehiculosController{
 
         $id = $_GET['id'];
 
-        $paradaModel = new Parada();
-        $paradas = $paradaModel->find($id);
+        $vehiculoModel = new Vehiculo();
+        $empresaModel = new Empresa();
+        $conductorModel = new Conductor();
 
-        require_once __DIR__ . '/Views/vehiculo/edit.php';
+        $vehiculo = $vehiculoModel->find($id);
+        $empresas = $empresaModel->getAll();
+        $conductores = $conductorModel->getAll();
+
+        require_once __DIR__ . '/Views/vehiculos/edit.php';
     }
 
     public function update(){
         Auth::check();
         Role::admin();
 
-        $paradaModel = new Parada();
+        $vehiculoModel = new Vehiculo();
 
-        $paradaModel->update($_POST['placa'], trim($_POST['id_vehiculo']));
+        $vehiculoModel->update(
+            $_POST['id_vehiculo'], 
+            trim($_POST['placa']),
+            trim($_POST['modelo']),
+            trim($_POST['capacidad']),
+            $_POST['id_empresa'],
+            $_POST['id_conductor']
+        );
 
-        header('Location: /Pruebas/BusGo/public/vehiculo');
+        header('Location: /Pruebas/BusGo/public/vehiculos');
         exit;
     }
 
@@ -62,10 +96,10 @@ class VehiculosController{
 
         $id = $_GET['id'];
 
-        $paradaModel = new Parada();
-        $paradaModel->delete($id);
+        $vehiculoModel = new Vehiculo();
+        $vehiculoModel->delete($id);
 
-        header('Location: /Pruebas/BusGo/public/vehiculo');
+        header('Location: /Pruebas/BusGo/public/vehiculos');
         exit;
     }
 }

@@ -3,44 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>BusGo</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
 </head>
 
 <body>
-    <h1>Bienvenido <?= htmlspecialchars($_SESSION['nombre'] ?? 'Invitado', ENT_QUOTES, 'UTF-8') ?> a BusGo</h1>
 
-    <p>Rol: <?= htmlspecialchars($_SESSION['rol'] ?? 'N/A', ENT_QUOTES, 'UTF-8') ?></p>
+    <div class="header">
 
-    <br><br>
+        <h1>BusGo</h1>
 
-    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+        <p>
+            Bienvenido
+            <strong><?= htmlspecialchars($_SESSION['nombre']) ?></strong>
+        </p>
 
-        <a href="/Pruebas/BusGo/public/usuarios/create">Registrar Usuario</a>
+        <p>
+            Rol:
+            <strong><?= htmlspecialchars($_SESSION['rol']) ?></strong>
+        </p>
 
-        <br><br>
+    </div>
 
-        <a href="/Pruebas/BusGo/public/usuarios">Gestionar Usuarios</a>
+    <div class="menu">
 
-        <br><br>
+    <?php if($_SESSION['rol'] === 'admin'): ?>
 
-        <a href="/Pruebas/BusGo/public/ruta">Ver rutas</a>
+        <a href="/Pruebas/BusGo/public/usuarios/create">
+            Registrar Usuario
+        </a>
 
-    <?php elseif(isset($_SESSION['rol']) && $_SESSION['rol'] === 'conductor'): ?>
+        <a href="/Pruebas/BusGo/public/usuarios">
+            Gestionar Usuarios
+        </a>
 
-        <a href="#">Mis Rutas Asignadas</a>
+        <a href="/Pruebas/BusGo/public/ruta">
+            Gestionar Rutas
+        </a>
 
-    <?php elseif(isset($_SESSION['rol']) && $_SESSION['rol'] === 'cliente'): ?>
+        <a href="/Pruebas/BusGo/public/vehiculos">
+            Vehículos
+        </a>
 
-        <a href="/Pruebas/BusGo/public/ruta">Ver rutas</a>
+        <a href="/Pruebas/BusGo/public/viajes">
+            Viajes
+        </a>
+
+    <?php elseif($_SESSION['rol'] === 'conductor'): ?>
+
+        <a href="#">
+            Mis Rutas
+        </a>
+
+    <?php elseif($_SESSION['rol'] === 'cliente'): ?>
+
+        <a href="/Pruebas/BusGo/public/ruta">
+            Ver Rutas
+        </a>
+
+        <a href="/Pruebas/BusGo/public/horarios">
+            Ver Horarios
+        </a>
 
     <?php endif; ?>
 
-    <br><br>
+    </div>
 
-    <p>
-        <a href="/Pruebas/BusGo/public/logout">Cerrar Sesión</a>
-    </p>
+    <div class="logout">
+
+        <a href="/Pruebas/BusGo/public/logout">
+            Cerrar Sesión
+        </a>
+
+    </div>
 
 </body>
-
 </html>

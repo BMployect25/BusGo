@@ -268,5 +268,101 @@ return [
     '/vehiculo_rutas/delete' => [
         'controller' => 'VehiculoRutaController',
         'method' => 'delete'
+    ],
+
+    //horarios
+
+    '/horarios' => [
+        'controller'=>'HorariosController',
+        'method'=>'index'
+    ],
+
+    '/horarios/create' => [
+        'controller'=>'HorariosController',
+        'method'=>'create'
+    ],
+
+    '/horarios/store' => [
+        'controller'=>'HorariosController',
+        'method'=>'store'
+    ],
+
+    '/horarios/edit' => [
+        'controller'=>'HorariosController',
+        'method'=>'edit'
+    ],
+
+    '/horarios/update' => [
+        'controller'=>'HorariosController',
+        'method'=>'update'
+    ],
+
+    '/horarios/delete' => [
+        'controller'=>'HorariosController',
+        'method'=>'delete'
+    ],
+
+    //ubicaciones
+
+    '/ubicaciones' => [
+        'controller' => 'UbicacionesController',
+        'method' => 'index'
+    ],
+
+    '/ubicaciones/create' => [
+        'controller' => 'UbicacionesController',
+        'method' => 'create'
+    ],
+
+    '/ubicaciones/store' => [
+        'controller' => 'UbicacionesController',
+        'method' => 'store'
+    ],
+
+    '/ubicaciones/edit' => [
+        'controller' => 'UbicacionesController',
+        'method' => 'edit'
+    ],
+
+    '/ubicaciones/update' => [
+        'controller' => 'UbicacionesController',
+        'method' => 'update'
+    ],
+
+    '/ubicaciones/delete' => [
+        'controller' => 'UbicacionesController',
+        'method' => 'delete'
+    ],
+
+    //Viajes
+
+    '/viajes' => [
+        'controller' => 'ViajesController',
+        'method' => 'index'
+    ],
+
+    '/viajes/create' => [
+        'controller' => 'ViajesController',
+        'method' => 'create'
+    ],
+
+    '/viajes/store' => [
+        'controller' => 'ViajesController',
+        'method' => 'store'
+    ],
+
+    '/viajes/edit' => [
+        'controller' => 'ViajesController',
+        'method' => 'edit'
+    ],
+
+    '/viajes/update' => [
+        'controller' => 'ViajesController',
+        'method' => 'update'
+    ],
+
+    '/viajes/delete' => [
+        'controller' => 'ViajesController',
+        'method' => 'delete'
     ]
 ];

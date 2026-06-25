@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Usuarios</title>
+    <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
 </head>
 
 <body>

@@ -1,85 +1,45 @@
-<!-- Mostrar el formulario para registrar un vehículo. -->
-
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Nuevo Vehículo</title>
+    <meta charset="UTF-8">
+    <title>Registrar Vehículo</title>
+    <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
 </head>
-
 <body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Registrar Vehículo</h1>
+        </div>
 
-    <h1>Registrar Vehículo</h1>
+        <form method="POST" action="/Pruebas/BusGo/public/vehiculos/store">
+            <label for="placa">Placa</label>
+            <input type="text" id="placa" name="placa" required>
 
-    <form method="POST" action="/Pruebas/BusGo/public/vehiculos/store"> 
-        Placa
+            <label for="modelo">Modelo</label>
+            <input type="text" id="modelo" name="modelo">
 
-    <br>
+            <label for="capacidad">Capacidad</label>
+            <input type="number" id="capacidad" name="capacidad">
 
-    <input type="text" name="placa" required>
+            <label for="id_empresa">Empresa</label>
+            <select id="id_empresa" name="id_empresa">
+                <?php foreach($empresas as $empresa): ?>
+                <option value="<?= $empresa['id_empresa'] ?>"><?= $empresa['nombre'] ?></option>
+                <?php endforeach; ?>
+            </select>
 
-    <br><br>
+            <label for="id_conductor">Conductor</label>
+            <select id="id_conductor" name="id_conductor">
+                <?php foreach($conductores as $conductor): ?>
+                <option value="<?= $conductor['id_conductor'] ?>"><?= $conductor['nombre'] ?> <?= $conductor['apellido'] ?></option>
+                <?php endforeach; ?>
+            </select>
 
-    Modelo
-
-    <br>
-
-    <input type="text" name="modelo">
-
-    <br><br>
-
-    Capacidad
-
-    <br>
-
-    <input type="number" name="capacidad">
-
-    <br><br>
-
-    Empresa
-
-    <br>
-
-    <select name="id_empresa">
-
-    <?php foreach($empresas as $empresa): ?>
-
-    <option value="<?= $empresa['id_empresa'] ?>">
-
-    <?= $empresa['nombre'] ?>
-
-    </option>
-
-    <?php endforeach; ?>
-
-    </select>
-
-    <br><br>
-
-    Conductor
-
-    <br>
-
-    <select name="id_conductor">
-
-    <?php foreach($conductores as $conductor): ?>
-
-    <option value="<?= $conductor['id_conductor'] ?>">
-
-    <?= $conductor['nombre'] ?> <?= $conductor['apellido'] ?>
-
-    </option>
-
-    <?php endforeach; ?>
-
-    </select>
-
-    <br><br>
-
-    <button>
-    Guardar
-    </button>
-
-    </form>
-
+            <div class="actions">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <a class="btn btn-secondary" href="/Pruebas/BusGo/public/vehiculos">Volver</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

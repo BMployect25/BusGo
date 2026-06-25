@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Vehículos</title>
+    <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
 </head>
 <body>
 

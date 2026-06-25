@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Vehículos y Rutas</title>
+    <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
 </head>
 
 <body>

@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ruta</title>
+    <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
+</head>
+
 <h1>Rutas Busgo</h1>
 <a href="/ruta/create">
     Nueva Ruta
