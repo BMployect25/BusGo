@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Usuarios</title>
-    <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
-</head>
-
-<body>
     <h1>Lista de Usuarios</h1>
+
     <p>
         <a href="/Pruebas/BusGo/public/css/">Volver al inicio</a>
     </p>
     <p>
         <a href="/Pruebas/BusGo/public/usuarios/create">Nuevo Usuario</a>
     </p>
-    <table border="1">
+
+    <?php require_once __DIR__ . '/partials/flash.php'; ?>
+
+    <table>
     
     <tr>
         <th>ID</th>
@@ -62,6 +57,4 @@
 
     </table>
 
-</body>
-
-</html>
+    <?php require_once __DIR__ . '/partials/flash.php'; ?>

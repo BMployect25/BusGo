@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
 </head>
 
-<body>
-    <h1>Iniciar Sesión</h1>
-    
-    <form method="POST" action="login/authenticate">
+<body class="login-page">
+    <div class="login-content">
+        <h1>Iniciar Sesión</h1>
+        <form class="login-form" method="POST" action="login/authenticate">
         <input
             type="email"
             name="correo"
@@ -28,7 +28,9 @@
             Entrar
         </button>
 
-    </form>
+        </form>
+        
+    </div>
 </body>
 
 </html>

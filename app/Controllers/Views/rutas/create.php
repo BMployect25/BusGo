@@ -28,11 +28,22 @@
                 <?php endforeach; ?>
             </select>
 
+            <br><br>
+            
             <div class="actions">
                 <button class="btn btn-primary" type="submit">Guardar</button>
                 <a class="btn btn-secondary" href="/Pruebas/BusGo/public/css/ruta">Volver a rutas</a>
             </div>
         </form>
+
+        <br><br>
+
+        <?php
+            $modulo = "Rutas";
+            $accion = "Crear rutas";
+
+            require_once __DIR__ . "/../partials/breadcrumb.php";
+            ?>
     </div>
 </body>
 </html>

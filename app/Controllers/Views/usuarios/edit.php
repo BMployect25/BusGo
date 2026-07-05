@@ -1,4 +1,12 @@
-<form method="POST" action="/Pruebas/BusGo/public/usuarios/update">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Usuarios</title>
+    <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
+</head>
+<body>
+<form class="compact-form" method="POST" action="/Pruebas/BusGo/public/usuarios/update">
 
     <input type="hidden" name="id" value="<?php echo htmlspecialchars($usuario['id_usuario'] ?? '', ENT_QUOTES); ?>">
 
@@ -54,3 +62,5 @@
     <br><br>
     |<a href="/Pruebas/BusGo/public/usuarios">Volver a usuarios</a>
 </p>
+</body>
+</html>

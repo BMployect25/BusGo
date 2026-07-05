@@ -8,21 +8,7 @@
 
 <body>
 
-    <div class="header">
-
-        <h1>BusGo</h1>
-
-        <p>
-            Bienvenido
-            <strong><?= htmlspecialchars($_SESSION['nombre']) ?></strong>
-        </p>
-
-        <p>
-            Rol:
-            <strong><?= htmlspecialchars($_SESSION['rol']) ?></strong>
-        </p>
-
-    </div>
+    <?php require_once __DIR__ . '/partials/header.php'; ?>
 
     <div class="menu">
 
@@ -31,6 +17,8 @@
         <a href="/Pruebas/BusGo/public/usuarios/create">
             Registrar Usuario
         </a>
+
+        <br><br>
 
         <a href="/Pruebas/BusGo/public/usuarios">
             Gestionar Usuarios
@@ -75,6 +63,8 @@
         </a>
 
     </div>
+
+    <?php require_once __DIR__ . '/partials/footer.php'; ?>
 
 </body>
 </html>

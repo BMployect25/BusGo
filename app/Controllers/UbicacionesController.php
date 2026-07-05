@@ -15,7 +15,9 @@ class UbicacionesController{
         $ubicacionModel = new Ubicacion();
         $ubicaciones = $ubicacionModel->getAll();
 
-        require_once __DIR__ . '/Views/ubicaciones.php';
+        $vista = 'ubicaciones.php';
+
+        require_once __DIR__ . '/Views/layout.php';
     }
 
     public function create(){

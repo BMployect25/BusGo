@@ -15,7 +15,9 @@ class HorariosController{
 
         $horarios = $horarioModel->getAll();
 
-        require_once __DIR__ . '/Views/horarios.php';
+        $vista = 'horarios.php';
+
+        require_once __DIR__ . '/Views/layout.php';
     }
 
     public function create(){

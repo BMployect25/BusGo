@@ -16,7 +16,9 @@ class ViajesController
         $viajeModel = new Viaje();
         $viajes = $viajeModel->getAll();
 
-        require_once __DIR__ . '/Views/viajes.php';
+        $vista = 'viajes.php';
+
+        require_once __DIR__ . '/Views/layout.php';
     }
 
     public function create()

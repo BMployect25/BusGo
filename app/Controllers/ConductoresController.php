@@ -15,7 +15,9 @@ class ConductoresController{
         $conductorModel = new Conductor();
         $conductores = $conductorModel->getAll();
 
-        require_once __DIR__ . '/Views/conductores.php';
+        $vista = 'conductores.php';
+
+        require_once __DIR__ . '/Views/layout.php';
     }
 
     //Mostrar formulario para registrar conductores 

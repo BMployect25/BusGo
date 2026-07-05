@@ -17,6 +17,8 @@
     <a href="/Pruebas/BusGo/public/empresas/create">Nueva Empresa</a>
 </p>
 
+<?php require_once __DIR__ . '/partials/flash.php'; ?>
+
 <table border="1">
 
 <tr>

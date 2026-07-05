@@ -9,16 +9,22 @@ class UserController
     /// Muestra la lista de usuarios
     public function index()
     {
+        Auth::check();
+        Role::admin();
+
         $userModel = new User();
         $usuarios = $userModel->getAll();
 
-        require_once __DIR__ . '/Views/usuarios.php';
+        $vista = "usuarios.php";
+
+        require_once __DIR__.'/Views/layout.php';
     }
 
     // Muestra el formulario para crear un nuevo usuario
     public function create()
     {
-         Role::admin();
+        Auth::check();
+        Role::admin();
 
         require_once __DIR__ .
         '/Views/usuarios/create.php';
@@ -38,8 +44,16 @@ class UserController
         // esto es para validar la contraseña
         $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $userModel = new User();
-        $userModel->create($nombre, $apellido, $correo, $telefono, $passwordHash, $rol);
+       $userModel = new User();
+
+        if($userModel->create($nombre, $apellido, $correo, $telefono, $passwordHash, $rol)){
+            $_SESSION['success'] = "Usuario registrado correctamente.";
+
+        }else{
+            $_SESSION['error'] = "No se pudo registrar el usuario.";
+
+        }
+
         header("Location: /Pruebas/BusGo/public/usuarios");
         exit;
     }
@@ -61,7 +75,7 @@ class UserController
         Role::admin();
 
         $userModel = new User();
-        $userModel->update(
+        $resultado = $userModel->update(
             $_POST['id'],
             trim($_POST['nombre']),
             trim($_POST['apellido']),
@@ -70,6 +84,13 @@ class UserController
             password_hash($_POST['password'], PASSWORD_DEFAULT),
             $_POST['rol'] ?? 'cliente'
         );
+       
+            if($resultado){
+                $_SESSION['success'] = "Usuario actualizado correctamente.";
+            }else{
+                $_SESSION['error'] = "No se pudo actualizar el usuario.";
+            }
+
         header("Location: /Pruebas/BusGo/public/usuarios");
         exit;
     }
@@ -80,7 +101,15 @@ class UserController
 
         $id = $_GET['id'];
         $userModel = new User();
-        $userModel->delete($id);
+        
+        if($userModel->delete($id)){
+
+            $_SESSION['success'] = "Usuario eliminado correctamente.";
+        }else{
+
+            $_SESSION['error'] = "No se pudo eliminar el usuario.";
+        }
+
         header("Location: /Pruebas/BusGo/public/usuarios");
         exit;
     }

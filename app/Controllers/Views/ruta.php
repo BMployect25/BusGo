@@ -17,6 +17,8 @@
     </p>
 <?php endif; ?>
 
+<?php require_once __DIR__ . '/partials/flash.php'; ?>
+
     <?php $rutas = $rutas ?? []; ?>
     <table border="1">
         <tr>
@@ -57,6 +59,8 @@
         </tr>
         <?php endforeach; ?>
 
+
+        <?php require_once __DIR__ . '/partials/flash.php'; ?>
     </table>
 </body>
 </html>

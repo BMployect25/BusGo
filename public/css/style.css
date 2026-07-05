@@ -14,7 +14,7 @@ body{
 
 /*Titulo 1*/
 h1{
-    color: #2c3e50;
+    color: #222d38;
 }
 
 table{
@@ -25,7 +25,7 @@ table{
 
 /*Encabezado*/
 th{
-    background: #4e6f91;
+    background: #3d5873;
     color: white;
 }
 
@@ -43,7 +43,7 @@ th, td{
 }
 
 .btn-primary{
-    background: #4e6f91;
+    background: #3d5873;
     color:white;
 }
 
@@ -56,23 +56,108 @@ input, select{
     width:100%;
     padding:10px;
     margin-top:5px;
+    box-sizing: border-box;
+}
+
+.login-page{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f6f9;
+    padding: 20px;
+}
+
+.login-content{
+    width: auto;
+    max-width: 420px;
+    margin: 0 auto;
+    flex: 0 1 auto;
+}
+
+.login-page h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form{
+    width: auto;
+    max-width: 280px;
+    margin: 0 auto;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.08);
+}
+
+.login-form input{
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+.login-form button{
+    width: 100%;
+    padding: 8px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #3d5873;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.login-form button:hover{
+    background: #3d5873;
+}
+
+.compact-form{
+    display: block !important;
+    width: auto !important;
+    max-width: 380px !important;
+    margin: 20px auto !important;
+    padding: 15px !important;
+    background: white !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 15px rgba(0,0,0,0.08) !important;
+}
+
+.compact-form input,
+.compact-form select,
+.compact-form button{
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 8px !important;
+}
+
+.compact-form button{
+    padding: 8px !important;
 }
 
 .header{
-    background: #4e6f91;
+    display: flex;
+    background: #3d5873;
     color:white;
     padding:20px 30px;
     border-radius:10px;
     margin-bottom:30px;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .header h1{
     margin:0;
+    display: flex;
     font-size:32px;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .header p{
     margin-top:10px;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .menu{
@@ -82,7 +167,7 @@ input, select{
 /*Enlaces*/
 .menu a{
     display:inline-block;
-    background: #4e6f91;
+    background: #3d5873;
     color:white;
     text-decoration:none;
     padding:12px 20px;
@@ -91,7 +176,7 @@ input, select{
 }
 
 .menu a:hover{
-    background:#4e6f91;
+    background:#3d5873;
 }
 
 .logout{
@@ -102,4 +187,91 @@ input, select{
     color:#e74c3c;
     font-weight:bold;
     text-decoration:none;
+}
+
+/*Sirve para que el usuario sepa dónde está.*/
+.breadcrumb{
+    margin:20px 0;
+    color:#666;
+}
+
+.success{
+
+    background:#d4edda;
+    color:#155724;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+    border:1px solid #c3e6cb;
+}
+
+.error{
+
+    background:#f8d7da;
+    color:#721c24;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+    border:1px solid #f5c6cb;
+}
+
+.compact-form {
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.footer {
+  background: #476685;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 30px;
+}
+
+.page-header {
+    margin-bottom: 20px;
+}
+
+.form-card {
+    max-width: 520px;
+    margin: 0 auto;
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.08);
+}
+
+.form-card label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+    color: #243447;
+}
+
+.form-card input,
+.form-card select,
+.form-card button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+}
+
+.form-card button {
+    border: none;
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
 }

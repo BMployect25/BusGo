@@ -44,11 +44,22 @@
                 <option value="cancelado">Cancelado</option>
             </select>
 
+            <br><br>
+            
             <div class="actions">
                 <button class="btn btn-primary" type="submit">Guardar Viaje</button>
                 <a class="btn btn-secondary" href="/Pruebas/BusGo/public/viajes">Volver</a>
             </div>
         </form>
+
+        <br><br>
+
+        <?php
+            $modulo = "Viaje";
+            $accion = "Crear viaje";
+
+            require_once __DIR__ . "/../partials/breadcrumb.php";
+            ?>
     </div>
 </body>
 </html>

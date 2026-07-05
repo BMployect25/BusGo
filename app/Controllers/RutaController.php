@@ -14,10 +14,15 @@ class RutaController
 
     public function index()
     {
+        Auth::check();
+        Role::admin();
+
         $rutaModel = new Ruta();
         $rutas = $rutaModel->getAll();
 
-        require_once __DIR__ . '/Views/ruta.php';
+        $vista = 'ruta.php';
+
+        require_once __DIR__ . '/Views/layout.php';
     }
 
     public function create()
@@ -57,6 +62,9 @@ class RutaController
 
     public function created()
     {
+        Auth::check();
+        Role::admin();
+
         $idRuta = $_GET['id'] ?? null;
 
         if (!$idRuta) {
@@ -84,6 +92,9 @@ class RutaController
 
     public function verRecorrido()
     {
+        Auth::check();
+        Role::admin();
+
         $idRuta = $_GET['id'];
         $rutaModel = new Ruta();
         

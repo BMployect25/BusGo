@@ -35,11 +35,22 @@
                 <option value="admin">Administrador</option>
             </select>
 
+            <br><br>
+
             <div class="actions">
                 <button class="btn btn-primary" type="submit">Crear Usuario</button>
                 <a class="btn btn-secondary" href="/Pruebas/BusGo/public/usuarios">Cancelar</a>
             </div>
         </form>
+
+        <br><br>
+
+        <?php
+            $modulo = "Usuarios";
+            $accion = "Registrar Usuario";
+
+            require_once __DIR__ . "/../partials/breadcrumb.php";
+        ?>
     </div>
 </body>
 </html>

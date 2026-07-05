@@ -22,6 +22,11 @@ return [
         'controller' => 'AuthController',
         'method' => 'logout'
     ],
+
+    '/admin' => [
+        'controller' => 'HomeController',
+        'method' => 'admin'
+    ],
     
     //usuarios
 

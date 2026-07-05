@@ -12,7 +12,9 @@ class EmpresaController{
         $empresaModel = new Empresa();
         $empresas = $empresaModel->getAll();
 
-        require_once __DIR__ . '/Views/empresas.php';
+        $vista = 'empresas.php';
+
+        require_once __DIR__ . '/Views/layout.php';
     }
 
     public function create(){
@@ -49,7 +51,7 @@ class EmpresaController{
 
         $empresas = $empresaModel->getAll();
 
-        require_once __DIR__ . '/Views/create.php';
+        require_once __DIR__ . '/Views/empresas/edit.php';
     }
 
     public function update(){

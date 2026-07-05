@@ -15,7 +15,9 @@ class VehiculosController{
         $vehiculoModel = new Vehiculo();
         $vehiculos = $vehiculoModel->getAll();
 
-        require_once __DIR__ . '/Views/vehiculos.php';
+        $vista = 'vehiculos.php';
+
+        require_once __DIR__ . '/Views/layout.php';
     }
 
     public function create(){
