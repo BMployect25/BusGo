@@ -4,7 +4,7 @@ require_once __DIR__ . '/Models/Empresa.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class EmpresaController{
+class EmpresaController extends BaseController{
     public function index(){
         Auth::check();
         Role::admin();
@@ -14,14 +14,14 @@ class EmpresaController{
 
         $vista = 'empresas.php';
 
-        require_once __DIR__ . '/Views/layout.php';
+        $this->view($vista, ['empresas' => $empresas]);
     }
 
     public function create(){
         Auth::check();
         Role::admin();
 
-        require_once __DIR__ . '/Views/empresas/create.php';
+        $this->view('empresas/create.php');
     }
 
     public function store(){
@@ -36,8 +36,9 @@ class EmpresaController{
         $empresaModel = new Empresa();
         $empresaModel->create($nombre, $nit, $telefono, $correo);
 
-        header('Location: /Pruebas/BusGo/public/empresas');
-        exit;
+
+        $this->success("Empresa creada correctamente.");
+        $this->redirect('/empresas');
     }
 
     // Método para mostrar el formulario de edición
@@ -51,7 +52,7 @@ class EmpresaController{
 
         $empresas = $empresaModel->getAll();
 
-        require_once __DIR__ . '/Views/empresas/edit.php';
+        $this->view('empresas/edit.php', ['empresas' => $empresas]);
     }
 
     public function update(){
@@ -68,27 +69,21 @@ class EmpresaController{
         trim($_POST['correo'])
     );
 
-    header(
-        "Location: /Pruebas/BusGo/public/empresas"
-    );
+    $this->success("Empresa actualizada correctamente.");
+        $this->redirect('/empresas');
+    }
 
-    exit;
-}
+    public function delete(){
+        Auth::check();
+        Role::admin();
 
-public function delete(){
-    Auth::check();
-    Role::admin();
+        $id = $_GET['id'];
 
-    $id = $_GET['id'];
+        $empresaModel = new Empresa();
 
-    $empresaModel = new Empresa();
+        $empresaModel->delete($id);
 
-    $empresaModel->delete($id);
-
-    header(
-        "Location: /Pruebas/BusGo/public/empresas"
-    );
-
-    exit;
-}
+        $this->success("Empresa eliminada correctamente.");
+        $this->redirect('/empresas');
+    }
 }

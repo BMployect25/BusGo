@@ -23,6 +23,16 @@ return [
         'method' => 'logout'
     ],
 
+    '/registro' => [
+        'controller' => 'AuthController',
+        'method' => 'register'
+    ],
+
+    '/registro/store' => [
+        'controller' => 'AuthController',
+        'method' => 'storeRegister'
+    ],
+
     '/admin' => [
         'controller' => 'HomeController',
         'method' => 'admin'
@@ -195,7 +205,7 @@ return [
 
     '/conductores' => [
         'controller'=>'ConductoresController',
-    '   method'=>'index'
+        'method'=>'index'
     ],
 
     '/conductores/create' => [

@@ -1,14 +1,13 @@
 <?php
 
-require_once __DIR__ . '/../../../config/database.php';
+require_once __DIR__.'/BaseModel.php';
 
-class RutaParada
+class RutaParada extends BaseModel
 {
-    private PDO $db;
 
     public function __construct()
     {
-        $this->db = Database::connect();
+        parent::__construct();
     }
 
     // Obtener recorrido completo de una ruta

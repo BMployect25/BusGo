@@ -1,15 +1,13 @@
 <?php
 
-require_once __DIR__ . '/../../../config/database.php';
+require_once __DIR__.'/BaseModel.php';
 
-class User
+class User extends BaseModel
 {
-    private PDO $db;
-
-    // Es la conexión a la base de datos
+    // Constructor que llama al constructor de la clase BaseModel
     public function __construct()
     {
-        $this->db = Database::connect();
+        parent::__construct();
     }
 
     // Método para obtener todos los usuarios

@@ -1,13 +1,11 @@
 <?php 
 
-require_once __DIR__ . '/../../../config/database.php';
+require_once __DIR__.'/BaseModel.php';
 
-class Ubicacion{
-    private PDO $db;
+class Ubicacion extends BaseModel{
 
-    public function __construct()
-    {
-        $this->db = Database::connect();
+    public function __construct(){
+        parent::__construct();
     } 
 
     public function getAll(){

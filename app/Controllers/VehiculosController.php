@@ -1,12 +1,14 @@
 <?php
 
+require_once __DIR__ . '/BaseController.php';
+require_once __DIR__ . '/Models/Ruta.php';
 require_once __DIR__ . '/Models/Vehiculo.php';
 require_once __DIR__ . '/Models/Empresa.php';
 require_once __DIR__ . '/Models/Conductor.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class VehiculosController{
+class VehiculosController extends BaseController{
 
     public function index(){
         Auth::check();
@@ -17,7 +19,7 @@ class VehiculosController{
 
         $vista = 'vehiculos.php';
 
-        require_once __DIR__ . '/Views/layout.php';
+        $this->view($vista, ['vehiculos' => $vehiculos]);
     }
 
     public function create(){
@@ -30,7 +32,7 @@ class VehiculosController{
         $empresas = $empresaModel->getAll();
         $conductores = $conductorModel->getAll();
 
-        require_once __DIR__ . '/Views/vehiculos/create.php';
+        $this->view('vehiculos/create.php', ['empresas' => $empresas, 'conductores' => $conductores]);
     }
 
     public function store(){
@@ -52,8 +54,8 @@ class VehiculosController{
             $idConductor
         );
 
-        header('Location: /Pruebas/BusGo/public/vehiculos');
-        exit;
+        $this->success("Vehículo creado correctamente.");
+        $this->redirect('/vehiculos');
     }
 
     public function edit(){
@@ -70,7 +72,7 @@ class VehiculosController{
         $empresas = $empresaModel->getAll();
         $conductores = $conductorModel->getAll();
 
-        require_once __DIR__ . '/Views/vehiculos/edit.php';
+        $this->view('vehiculos/edit.php', ['vehiculo' => $vehiculo, 'empresas' => $empresas, 'conductores' => $conductores]);
     }
 
     public function update(){
@@ -88,8 +90,9 @@ class VehiculosController{
             $_POST['id_conductor']
         );
 
-        header('Location: /Pruebas/BusGo/public/vehiculos');
-        exit;
+
+        $this->success("Vehículo actualizado correctamente.");
+        $this->redirect('/vehiculos');
     }
 
     public function delete(){
@@ -101,7 +104,7 @@ class VehiculosController{
         $vehiculoModel = new Vehiculo();
         $vehiculoModel->delete($id);
 
-        header('Location: /Pruebas/BusGo/public/vehiculos');
-        exit;
+        $this->success("Vehículo eliminado correctamente.");
+        $this->redirect('/vehiculos');
     }
 }

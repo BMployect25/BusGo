@@ -1,10 +1,11 @@
 <?php
 
 require_once __DIR__ . '/Models/User.php';
+require_once __DIR__.'/BaseController.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class UserController
+class UserController extends BaseController
 {
     /// Muestra la lista de usuarios
     public function index()
@@ -15,9 +16,7 @@ class UserController
         $userModel = new User();
         $usuarios = $userModel->getAll();
 
-        $vista = "usuarios.php";
-
-        require_once __DIR__.'/Views/layout.php';
+        $this->view('usuarios.php', ['usuarios' => $usuarios]);
     }
 
     // Muestra el formulario para crear un nuevo usuario
@@ -26,8 +25,8 @@ class UserController
         Auth::check();
         Role::admin();
 
-        require_once __DIR__ .
-        '/Views/usuarios/create.php';
+        $vista = 'usuarios/create.php';
+        $this->view($vista);
     }
 
     // Procesa el formulario de creación de usuario
@@ -47,15 +46,13 @@ class UserController
        $userModel = new User();
 
         if($userModel->create($nombre, $apellido, $correo, $telefono, $passwordHash, $rol)){
-            $_SESSION['success'] = "Usuario registrado correctamente.";
+            $this->success("Usuario registrado correctamente.");
 
         }else{
-            $_SESSION['error'] = "No se pudo registrar el usuario.";
-
+            $this->error("No se pudo registrar el usuario.");
         }
 
-        header("Location: /Pruebas/BusGo/public/usuarios");
-        exit;
+        $this->redirect('/usuarios');
     }
 
     public function edit(){
@@ -67,7 +64,8 @@ class UserController
         $userModel = new User();
         $usuario = $userModel->find($id);
     
-        require_once __DIR__ . '/Views/usuarios/edit.php';
+        $vista = 'usuarios/edit.php';
+        $this->view($vista);
     }
 
     public function update(){
@@ -86,13 +84,12 @@ class UserController
         );
        
             if($resultado){
-                $_SESSION['success'] = "Usuario actualizado correctamente.";
+                $this->success("Usuario actualizado correctamente.");
             }else{
-                $_SESSION['error'] = "No se pudo actualizar el usuario.";
+                $this->error("No se pudo actualizar el usuario.");
             }
 
-        header("Location: /Pruebas/BusGo/public/usuarios");
-        exit;
+        $this->redirect('/usuarios');
     }
 
     public function delete(){
@@ -104,13 +101,12 @@ class UserController
         
         if($userModel->delete($id)){
 
-            $_SESSION['success'] = "Usuario eliminado correctamente.";
+            $this->success("Usuario eliminado correctamente.");
         }else{
 
-            $_SESSION['error'] = "No se pudo eliminar el usuario.";
+            $this->error("No se pudo eliminar el usuario.");
         }
 
-        header("Location: /Pruebas/BusGo/public/usuarios");
-        exit;
+        $this->redirect('/usuarios');
     }
 }

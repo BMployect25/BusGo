@@ -1,10 +1,11 @@
 <?php
 
 require_once __DIR__ . '/Models/Parada.php';
+require_once __DIR__ . '/Models/Parada.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class ParadaController{
+class ParadaController extends BaseController{
 
     public function index(){
         Auth::check();
@@ -12,14 +13,14 @@ class ParadaController{
 
         $paradaModel = new Parada();
         $paradas = $paradaModel->getAll();
-        require_once __DIR__ . '/Views/paradas.php';
+        $this->view('paradas.php', ['paradas' => $paradas]);
     }
 
     public function create(){
         Auth::check();
         Role::admin();
 
-        require_once __DIR__ . '/Views/paradas/create.php';
+        $this->view('paradas/create.php');
     }
 
     public function store(){
@@ -29,7 +30,8 @@ class ParadaController{
         $nombre = trim($_POST['nombre_parada']);
         $paradaModel = new Parada();
         $paradaModel->create($nombre);
-        header('Location: /Pruebas/BusGo/public/paradas');
+        $this->success("Parada creada correctamente.");
+        $this->redirect('/paradas');
     }
 
     public function edit(){
@@ -41,7 +43,8 @@ class ParadaController{
         $paradaModel = new Parada();
         $paradas = $paradaModel->find($id);
 
-        require_once __DIR__ . '/Views/paradas/edit.php';
+
+        $this->view('paradas/edit.php', ['parada' => $paradas]);
     }
 
     public function update(){
@@ -52,7 +55,8 @@ class ParadaController{
 
         $paradaModel->update($_POST['id_parada'], trim($_POST['nombre_parada']));
 
-        header('Location: /Pruebas/BusGo/public/paradas');
+        $this->success("Parada actualizada correctamente.");
+        $this->redirect('/paradas');
         exit;
     }
 
@@ -65,7 +69,7 @@ class ParadaController{
         $paradaModel = new Parada();
         $paradaModel->delete($id);
 
-        header('Location: /Pruebas/BusGo/public/paradas');
-        exit;
+        $this->success("Parada eliminada correctamente.");
+        $this->redirect('/paradas');
     }
 }

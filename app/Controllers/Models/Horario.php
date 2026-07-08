@@ -1,13 +1,13 @@
 <?php
 
-require_once __DIR__.'/../../../config/database.php';
+require_once __DIR__.'/BaseModel.php';
 
-class Horario
+class Horario extends BaseModel
 {
-    private PDO $db;
 
-    public function __construct(){
-        $this->db = Database::connect();
+    public function __construct()
+    {
+        parent::__construct();
     }
 
     public function getAll(){

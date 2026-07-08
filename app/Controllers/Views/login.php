@@ -29,6 +29,11 @@
         </button>
 
         </form>
+
+        <p style="text-align: center; margin-top: 20px;">
+            ¿No tienes cuenta? 
+            <a href="/Pruebas/BusGo/public/registro" style="color: #3498db; text-decoration: none;">Regístrate aquí</a>
+        </p>
         
     </div>
 </body>

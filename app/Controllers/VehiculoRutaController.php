@@ -1,11 +1,12 @@
 <?php
 
+require_once __DIR__ . '/Models/VehiculoRuta.php';
 require_once __DIR__ . '/Models/Vehiculo.php';
 require_once __DIR__ . '/Models/Ruta.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class VehiculoRutaController{
+class VehiculoRutaController extends BaseController{
     public function index(){
         Auth::check();
         Role::admin();
@@ -13,7 +14,7 @@ class VehiculoRutaController{
         $vehiculoRutaModel = new VehiculoRuta();
         $asignaciones = $vehiculoRutaModel->getAll();
 
-        require_once __DIR__ . '/Views/vehiculo_rutas.php';
+        $this->view('vehiculo_rutas.php', ['asignaciones' => $asignaciones]);
     }
 
     //Cargar Vehiculos y Rutas
@@ -27,7 +28,7 @@ class VehiculoRutaController{
         $vehiculos = $vehiculoModel->getAll();
         $rutas = $rutaModel->getAll();
 
-        require_once __DIR__ . '/Views/vehiculo_rutas/create.php';
+        $this->view('vehiculo_rutas/create.php', ['vehiculos' => $vehiculos, 'rutas' => $rutas]);
     }
 
     public function store(){
@@ -42,9 +43,8 @@ class VehiculoRutaController{
             $_POST['id_ruta']
         );
 
-        header("Location: /Pruebas/BusGo/public/vehiculo_rutas");
-
-        exit;
+        $this->success("Asignación creada correctamente.");
+        $this->redirect('/vehiculo_rutas');
     }
 
     public function delete(){
@@ -55,8 +55,7 @@ class VehiculoRutaController{
 
         $vehiculoRutaModel->delete($_GET['id']);
 
-        header("Location: /Pruebas/BusGo/public/vehiculo_rutas");
-
-        exit;
+        $this->success("Asignación eliminada correctamente.");
+        $this->redirect('/vehiculo_rutas');
     }
 }

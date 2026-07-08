@@ -1,5 +1,8 @@
 <?php
-class AuthController
+
+require_once __DIR__.'/BaseController.php';
+
+class AuthController extends BaseController
 {
     public function login(){
         require_once __DIR__ . '/Views/login.php';
@@ -21,7 +24,8 @@ class AuthController
         $usuario = $userModel->findByEmail($correo);
 
         if (!$usuario){
-            die('Usuario no encontrado');
+            $this->error('Usuario no encontrado');
+            $this->redirect('/login');
         }
 
         // Soportar distintos nombres de columna de contraseña
@@ -39,7 +43,8 @@ class AuthController
             : hash_equals($storedPassword, $contrasena);
 
         if (!$passwordOk){
-            die('Contraseña incorrecta');
+            $this->error('Contraseña incorrecta');
+            $this->redirect('/login');
         }
 
         $_SESSION['id_usuario'] = $usuario['id_usuario'] ?? null;
@@ -58,5 +63,54 @@ class AuthController
         header("Location: /Pruebas/BusGo/public/login");
         exit;
     }
-    
+
+    public function register(){
+        require_once __DIR__ . '/Views/auth/register.php';
+    }
+
+    public function storeRegister(){
+        require_once __DIR__.'/Models/User.php';
+
+        $nombre = trim($_POST['nombre']);
+        $apellido = trim($_POST['apellido']);
+        $correo = trim($_POST['correo']);
+        $telefono = trim($_POST['telefono']);
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['confirm_password'];
+
+        if(
+            empty($nombre) ||
+            empty($apellido) ||
+            empty($correo) ||
+            empty($telefono) ||
+            empty($password) ||
+            empty($confirmPassword)
+        ){
+            $this->error("Todos los campos son obligatorios.");
+            $this->redirect("/registro");
+        }
+
+        if($password !== $confirmPassword){
+            $this->error("Las contraseñas no coinciden.");
+            $this->redirect("/registro");
+        }
+
+        $userModel = new User();
+        $usuarioExistente = $userModel->findByEmail($correo);
+
+        if($usuarioExistente){
+            $this->error("El correo ya está registrado.");
+            $this->redirect("/registro");
+        }
+
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
+        if($userModel->create($nombre, $apellido, $correo, $telefono, $passwordHash, "usuario")){
+            $this->success("Registro exitoso. Ahora puedes iniciar sesión.");
+            $this->redirect("/login");
+        } else {
+            $this->error("Error al registrar el usuario.");
+            $this->redirect("/registro");
+        }
+    }
 }

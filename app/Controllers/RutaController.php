@@ -3,12 +3,13 @@
 //esto es para que solo los administradores puedan acceder a las rutas de este controlador
 require_once __DIR__ . '/../Middleware/Role.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
+require_once __DIR__ . '/BaseController.php';
 require_once __DIR__ . '/Models/Ruta.php';
 require_once __DIR__ . '/Models/Empresa.php';
 require_once __DIR__ . '/Models/Parada.php';
 require_once __DIR__ . '/Models/RutaParada.php';
 
-class RutaController
+class RutaController extends BaseController
 {
     private $rutaModel;
 
@@ -20,9 +21,7 @@ class RutaController
         $rutaModel = new Ruta();
         $rutas = $rutaModel->getAll();
 
-        $vista = 'ruta.php';
-
-        require_once __DIR__ . '/Views/layout.php';
+        $this->view('rutas/index.php', ['rutas' => $rutas]);
     }
 
     public function create()
@@ -35,8 +34,8 @@ class RutaController
 
         // Obtener todas las empresas de la BD
         $empresas = $empresaModel->getAll();
-        
-        require_once __DIR__ . '/Views/rutas/create.php';
+
+        $this->view('rutas/create.php', ['empresas' => $empresas]);
     }
 
     public function store()
@@ -51,13 +50,13 @@ class RutaController
         $rutaModel = new Ruta();
         $rutaId = $rutaModel->create($nombre_ruta, $origen, $destino, $id_empresa);
 
-        if ($rutaId === false) {
-            header('Location: /Pruebas/BusGo/public/css/ruta');
-            exit;
+        if ($rutaId) {
+            $this->success("Ruta creada correctamente.");
+        } else {
+            $this->error("No se pudo crear la ruta.");
         }
 
-        header('Location: /Pruebas/BusGo/public/css/ruta/created?id=' . $rutaId);
-        exit;
+        $this->redirect('/rutas');
     }
 
     public function created()
@@ -75,7 +74,7 @@ class RutaController
         $rutaModel = new Ruta();
         $ruta = $rutaModel->find($idRuta);
 
-        require_once __DIR__ . '/Views/rutas/created.php';
+        $this->view('rutas/created.php', ['ruta' => $ruta]);
     }
 
     public function createRecorrido()
@@ -87,7 +86,7 @@ class RutaController
         $paradaModel = new Parada();
         $paradas = $paradaModel->getAll();
 
-        require_once __DIR__ . '/Views/rutas/createRecorrido.php';
+        $this->view('rutas/createRecorrido.php', ['paradas' => $paradas]);
     }
 
     public function verRecorrido()
@@ -104,7 +103,7 @@ class RutaController
         // Proveer también los datos de la ruta individual a la vista
         $ruta = $rutaModel->find($idRuta);
 
-        require_once __DIR__ . '/Views/recorrido.php';
+        $this->view('rutas/verRecorrido.php', ['ruta' => $ruta, 'recorrido' => $recorrido]);
     }
 
     public function delete()
@@ -147,7 +146,7 @@ class RutaController
         $empresaModel = new Empresa();
         $empresas = $empresaModel->getAll();
 
-        require_once __DIR__ . '/Views/rutas/edit.php';
+        $this->view('rutas/edit.php', ['ruta' => $ruta, 'empresas' => $empresas]);
     }
 
     public function update()
@@ -168,8 +167,13 @@ class RutaController
 
         $this->rutaModel->update($idRuta, $nombre_ruta, $origen, $destino, $id_empresa);
 
-        header('Location: /Pruebas/BusGo/public/css/ruta');
-        exit;
+        if ($this->rutaModel) {
+            $this->success("Ruta actualizada correctamente.");
+        } else {
+            $this->error("No se pudo actualizar la ruta.");
+        }
+
+        $this->redirect('/rutas');
     }
 
     // Constructor para asegurar que el usuario esté autenticado antes de acceder a cualquier método
@@ -195,11 +199,8 @@ class RutaController
 
         );
 
-        header(
-            "Location: /Pruebas/BusGo/public/ruta/verRecorrido?id=" . $_POST['id_ruta']
-        );
-
-        exit;
+        $this->success("Recorrido agregado correctamente.");
+        $this->redirect('/rutas/verRecorrido?id=' . $_POST['id_ruta']);
     }
 
     public function deleteRecorrido(){
@@ -213,7 +214,8 @@ class RutaController
         $idRuta = $registro['id_ruta'];
         $rutaParadaModel->delete($idRutaParada);
 
-        header("Location: /Pruebas/BusGo/public/css/ruta/verRecorrido?id=$idRuta");
+        $this->success("Recorrido eliminado correctamente.");
+        $this->redirect('/rutas/verRecorrido?id=' . $idRuta);
 
         exit;
     }
@@ -227,7 +229,7 @@ class RutaController
 
         $registro = $rutaParadaModel->find($idRutaParada);
 
-        require_once __DIR__ . '/Views/rutas/editRecorrido.php';
+        $this->view('rutas/editRecorrido.php', ['registro' => $registro]);
     }
 
     public function updateRecorrido(){
@@ -241,10 +243,8 @@ class RutaController
             $_POST['orden_recorrido']
         );
 
-        header(
-            "Location: /Pruebas/BusGo/public/css/ruta/verRecorrido?id=" .
-            $_POST['id_ruta']
-        );
+        $this->success("Recorrido actualizado correctamente.");
+        $this->redirect('/rutas/verRecorrido?id=' . $_POST['id_ruta']);
 
         exit;
     }

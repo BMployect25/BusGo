@@ -1,12 +1,11 @@
 <?php
 
-require_once __DIR__ . '/../../../config/database.php';
+require_once __DIR__.'/BaseModel.php';
 
-class Empresa{
-    private $db;
+class Empresa extends BaseModel{
 
     public function __construct(){
-        $this->db = Database::connect();
+        parent::__construct();
     }
 
     // Obtiene todas las empresas

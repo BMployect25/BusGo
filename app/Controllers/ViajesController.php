@@ -1,12 +1,13 @@
 <?php
 
+require_once __DIR__ . '/BaseController.php';
 require_once __DIR__ . '/Models/Viaje.php';
 require_once __DIR__ . '/Models/VehiculoRuta.php';
 require_once __DIR__ . '/Models/Conductor.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class ViajesController
+class ViajesController extends BaseController
 {
     public function index()
     {
@@ -18,7 +19,7 @@ class ViajesController
 
         $vista = 'viajes.php';
 
-        require_once __DIR__ . '/Views/layout.php';
+        $this->view($vista, ['viajes' => $viajes]);
     }
 
     public function create()
@@ -32,7 +33,7 @@ class ViajesController
         $vehiculoRutas = $vehiculoRutaModel->getAll();
         $conductores = $conductorModel->getAll();
 
-        require_once __DIR__ . '/Views/viajes/create.php';
+        $this->view('viajes/create.php', ['vehiculoRutas' => $vehiculoRutas, 'conductores' => $conductores]);
     }
 
     public function store()
@@ -57,8 +58,8 @@ class ViajesController
             $estado
         );
 
-        header('Location: /Pruebas/BusGo/public/viajes');
-        exit;
+        $this->success("Viaje creado correctamente.");
+        $this->redirect('/viajes');
     }
 
     public function edit()
@@ -76,7 +77,7 @@ class ViajesController
         $vehiculoRutas = $vehiculoRutaModel->getAll();
         $conductores = $conductorModel->getAll();
 
-        require_once __DIR__ . '/Views/viajes/edit.php';
+        $this->view('viajes/edit.php', ['viaje' => $viaje, 'vehiculoRutas' => $vehiculoRutas, 'conductores' => $conductores]);
     }
 
     public function update()
@@ -96,8 +97,8 @@ class ViajesController
             $_POST['estado']
         );
 
-        header('Location: /Pruebas/BusGo/public/viajes');
-        exit;
+        $this->success("Viaje actualizado correctamente.");
+        $this->redirect('/viajes');
     }
 
     public function delete()
@@ -110,7 +111,7 @@ class ViajesController
         $viajeModel = new Viaje();
         $viajeModel->delete($id);
 
-        header('Location: /Pruebas/BusGo/public/viajes');
-        exit;
+        $this->success("Viaje eliminado correctamente.");
+        $this->redirect('/viajes');
     }
 }

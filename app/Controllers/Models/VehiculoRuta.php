@@ -1,13 +1,12 @@
 <?php
 
-require_once __DIR__.'/../../../config/database.php';
+require_once __DIR__.'/BaseModel.php';
 
-class VehiculoRuta{
-    private PDO $db;
+class VehiculoRuta extends BaseModel{
 
     public function __construct()
     {
-        $this->db = Database::connect();
+        parent::__construct();
     }
 
     public function getAll(){

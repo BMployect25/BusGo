@@ -1,16 +1,15 @@
 <?php
 
-require_once __DIR__ . '/../../../config/database.php';
+require_once __DIR__.'/BaseModel.php';
 
-class Ruta
+class Ruta extends BaseModel
 {
-    private PDO $db;
 
     public function __construct()
     {
-        $this->db = Database::connect();
+        parent::__construct();
     }
-
+    
     public function getAll(): array
     {
         $stmt = $this->db->query('SELECT id_ruta, nombre_ruta, origen, destino, id_empresa FROM rutas');

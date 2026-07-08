@@ -1,12 +1,14 @@
 <?php
 
+require_once __DIR__ . '/Models/Ruta.php';
+require_once __DIR__ . '/Models/Vehiculo.php';
 require_once __DIR__ . '/Models/Ubicacion.php';
 require_once __DIR__ . '/Models/Vehiculo.php';
 
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class UbicacionesController{
+class UbicacionesController extends BaseController{
 
     public function index(){
         Auth::check();
@@ -17,7 +19,7 @@ class UbicacionesController{
 
         $vista = 'ubicaciones.php';
 
-        require_once __DIR__ . '/Views/layout.php';
+        $this->view($vista, ['ubicaciones' => $ubicaciones]);
     }
 
     public function create(){
@@ -27,7 +29,7 @@ class UbicacionesController{
         $vehiculoModel = new Vehiculo();
         $vehiculos = $vehiculoModel->getAll();
 
-        require_once __DIR__ . '/Views/ubicaciones/create.php';
+        $this->view('ubicaciones/create.php', ['vehiculos' => $vehiculos]);
     }
 
     public function store(){
@@ -43,9 +45,8 @@ class UbicacionesController{
             $_POST['estado']
         );
 
-        header("Location: /Pruebas/BusGo/public/ubicaciones");
-
-        exit;
+        $this->success("Ubicación creada correctamente.");
+        $this->redirect('/ubicaciones');
     }
 
     public function edit(){
@@ -59,7 +60,7 @@ class UbicacionesController{
         $ubicacion = $ubicacionModel->find($id);
         $vehiculos = $vehiculoModel->getAll();
 
-        require_once __DIR__ . '/Views/ubicaciones/edit.php';
+        $this->view('ubicaciones/edit.php', ['ubicacion' => $ubicacion, 'vehiculos' => $vehiculos]);
     }
 
     public function update(){
@@ -77,9 +78,8 @@ class UbicacionesController{
             $_POST['estado']
         );
 
-        header("Location: /Pruebas/BusGo/public/ubicaciones");
-
-        exit;
+        $this->success("Ubicación actualizada correctamente.");
+        $this->redirect('/ubicaciones');
     }
 
     public function delete(){
@@ -91,8 +91,7 @@ class UbicacionesController{
         $ubicacionModel = new Ubicacion();
         $ubicacionModel->delete($id);
 
-        header("Location: /Pruebas/BusGo/public/ubicaciones");
-
-        exit;
+        $this->success("Ubicación eliminada correctamente.");
+        $this->redirect('/ubicaciones');
     }
 }

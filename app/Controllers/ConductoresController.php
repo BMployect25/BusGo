@@ -3,10 +3,12 @@
 //requirimientos
 require_once __DIR__ . '/Models/Conductor.php';
 require_once __DIR__ . '/Models/Empresa.php';
+require_once __DIR__ . '/Models/Conductor.php';
+require_once __DIR__ . '/Models/Empresa.php';
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class ConductoresController{
+class ConductoresController extends BaseController{
     //Mostrar todos los conductores
     public function index(){
         Auth::check();
@@ -17,7 +19,7 @@ class ConductoresController{
 
         $vista = 'conductores.php';
 
-        require_once __DIR__ . '/Views/layout.php';
+        $this->view($vista, ['conductores' => $conductores]);
     }
 
     //Mostrar formulario para registrar conductores 
@@ -28,7 +30,7 @@ class ConductoresController{
         $empresaModel = new Empresa();
         $empresas = $empresaModel->getAll();
 
-        require_once __DIR__ . '/Views/conductores/create.php';
+        $this->view('conductores/create.php', ['empresas' => $empresas]);
     }
 
     //Guardar el conductor en MySQL
@@ -51,9 +53,9 @@ class ConductoresController{
             $licencia,
             $idEmpresa
         );
-        header("Location: /Pruebas/BusGo/public/conductores");
 
-        exit;
+        $this->success("Conductor registrado correctamente.");
+        $this->redirect('/conductores');
     }
 
     //Cargar un conductor para modificarlo
@@ -69,7 +71,7 @@ class ConductoresController{
         $conductor = $conductorModel->find($id);
         $empresas = $empresaModel->getAll();
 
-        require_once __DIR__ . '/Views/conductores/edit.php';
+        $this->view('conductores/edit.php', ['conductor' => $conductor, 'empresas' => $empresas]);
     }
 
     //Actualizar datos del conductor
@@ -88,9 +90,8 @@ class ConductoresController{
             $_POST['id_empresa']
         );
 
-        header("Location: /Pruebas/BusGo/public/conductores");
-
-        exit;
+        $this->success("Conductor actualizado correctamente.");
+        $this->redirect('/conductores');
     }
 
     //Eliminar conductor
@@ -104,8 +105,7 @@ class ConductoresController{
         $conductorModel = new Conductor();
         $conductorModel->delete($id);
 
-        header("Location: /Pruebas/BusGo/public/conductores");
-
-        exit;
+        $this->success("Conductor eliminado correctamente.");
+        $this->redirect('/conductores');
     }
 }

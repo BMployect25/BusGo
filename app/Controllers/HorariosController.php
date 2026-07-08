@@ -1,12 +1,13 @@
 <?php
 
+require_once __DIR__ . '/BaseController.php';
 require_once __DIR__ . '/Models/Horario.php';
 require_once __DIR__ . '/Models/VehiculoRuta.php';
 
 require_once __DIR__ . '/../Middleware/Auth.php';
 require_once __DIR__ . '/../Middleware/Role.php';
 
-class HorariosController{
+class HorariosController extends BaseController{
     public function index(){
         Auth::check();
         Role::admin();
@@ -17,7 +18,7 @@ class HorariosController{
 
         $vista = 'horarios.php';
 
-        require_once __DIR__ . '/Views/layout.php';
+        $this->view($vista, ['horarios' => $horarios]);
     }
 
     public function create(){
@@ -28,7 +29,7 @@ class HorariosController{
 
         $vehiculoRutas = $vehiculoRutaModel->getAll();
 
-        require_once __DIR__ . '/Views/horarios/create.php';
+        $this->view('horarios/create.php', ['vehiculoRutas' => $vehiculoRutas]);
     }
 
     public function store(){
@@ -48,9 +49,8 @@ class HorariosController{
 
         );
 
-        header("Location: /Pruebas/BusGo/public/horarios");
-
-        exit;
+        $this->success("Horario creado correctamente.");
+        $this->redirect('/horarios');
     }
 
     public function edit(){
@@ -65,7 +65,7 @@ class HorariosController{
         $horario = $horarioModel->find($id);
         $vehiculoRutas = $vehiculoRutaModel->getAll();
 
-        require_once __DIR__ . '/Views/horarios/edit.php';
+        $this->view('horarios/edit.php', ['horario' => $horario, 'vehiculoRutas' => $vehiculoRutas]);
     }
 
     public function update(){
@@ -86,9 +86,8 @@ class HorariosController{
 
         );
 
-        header("Location: /Pruebas/BusGo/public/horarios");
-
-        exit;
+        $this->success("Horario actualizado correctamente.");
+        $this->redirect('/horarios');
     }
 
     public function delete(){
@@ -101,8 +100,7 @@ class HorariosController{
 
         $horarioModel->delete($id);
 
-        header("Location: /Pruebas/BusGo/public/horarios");
-
-        exit;
+        $this->success("Horario eliminado correctamente.");
+        $this->redirect('/horarios');
     }
 }
