@@ -19,14 +19,14 @@ class Parada extends BaseModel{
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function create($nombre){
-        $stmt = $this->db->prepare("INSERT INTO paradas (nombre_parada) VALUES (?)");
-        return $stmt->execute([$nombre]);
+    public function create($nombre, $latitud, $longitud){
+        $stmt = $this->db->prepare("INSERT INTO paradas (nombre_parada, latitud, longitud) VALUES (?, ?, ?)");
+        return $stmt->execute([$nombre, $latitud, $longitud]);
     }
 
-    public function update($id, $nombre){
-        $stmt = $this->db->prepare("UPDATE paradas SET nombre_parada = ? WHERE id_parada = ?");
-        return $stmt->execute([$nombre, $id]);
+    public function update($id, $nombre, $latitud, $longitud){
+        $stmt = $this->db->prepare("UPDATE paradas SET nombre_parada = ?, latitud = ?, longitud = ? WHERE id_parada = ?");
+        return $stmt->execute([$nombre, $latitud, $longitud, $id]);
     }
 
     public function delete($id){

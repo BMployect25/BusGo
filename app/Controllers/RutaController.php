@@ -97,8 +97,7 @@ class RutaController extends BaseController
         $idRuta = $_GET['id'];
         $rutaModel = new Ruta();
         
-        $rutaParadaModel = new RutaParada();
-        $recorrido = $rutaParadaModel->getByRuta($idRuta);
+        $recorrido = $rutaModel->obtenerRecorrido($idRuta);
 
         // Proveer también los datos de la ruta individual a la vista
         $ruta = $rutaModel->find($idRuta);

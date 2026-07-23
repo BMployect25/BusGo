@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <title>Recorrido de la ruta</title>
     <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
     <div class="container">
         <h1>Recorrido de la Ruta</h1>
+
+        <div id="map"></div>
 
         <p>
             <a href="/Pruebas/BusGo/public/ruta">Volver a rutas</a>
@@ -50,5 +53,11 @@
             <?php endforeach; ?>
         </table>
     </div>
+    <script>
+        const recorrido = <?= json_encode($recorrido); ?>;
+    </script>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="/Pruebas/BusGo/public/js/mapa/main.js"></script>
 </body>
 </html>

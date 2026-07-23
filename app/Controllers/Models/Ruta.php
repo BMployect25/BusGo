@@ -18,18 +18,21 @@ class Ruta extends BaseModel
 
     public function obtenerRecorrido($idRuta)
     {
-        $stmt = $this->db->query("
+        $stmt = $this->db->prepare("
             SELECT
                 r.nombre_ruta,
                 p.nombre_parada,
-                rp.orden_recorrido
+                rp.orden_recorrido,
+                p.latitud,
+                p.longitud
             FROM ruta_paradas rp
             INNER JOIN rutas r ON rp.id_ruta = r.id_ruta
             INNER JOIN paradas p ON rp.id_parada = p.id_parada
-            WHERE rp.id_ruta = $idRuta
+            WHERE rp.id_ruta = ?
             ORDER BY rp.orden_recorrido
         ");
-    
+
+        $stmt->execute([$idRuta]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

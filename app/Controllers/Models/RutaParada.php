@@ -19,7 +19,9 @@ class RutaParada extends BaseModel
             rp.id_ruta_parada,
             r.nombre_ruta,
             rp.orden_recorrido,
-            p.nombre_parada
+            p.nombre_parada,
+            p.latitud,
+            p.longitud
         FROM ruta_paradas rp
         INNER JOIN rutas r
             ON rp.id_ruta = r.id_ruta

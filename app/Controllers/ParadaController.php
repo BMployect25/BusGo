@@ -27,10 +27,32 @@ class ParadaController extends BaseController{
         Auth::check();
         Role::admin();
 
-        $nombre = trim($_POST['nombre_parada']);
+        $nombre = trim($_POST['nombre_parada'] ?? '');
+        $latitud = trim($_POST['latitud'] ?? '');
+        $longitud = trim($_POST['longitud'] ?? '');
+
+        if ($nombre === '' || $latitud === '' || $longitud === '') {
+            $this->error('Todos los campos son obligatorios.');
+            $this->redirect('/paradas/create');
+        }
+
+        $latitudValue = (float) $latitud;
+        $longitudValue = (float) $longitud;
+
+        if ($latitudValue < -90 || $latitudValue > 90) {
+            $this->error('Latitud inválida.');
+            $this->redirect('/paradas/create');
+        }
+
+        if ($longitudValue < -180 || $longitudValue > 180) {
+            $this->error('Longitud inválida.');
+            $this->redirect('/paradas/create');
+        }
+
         $paradaModel = new Parada();
-        $paradaModel->create($nombre);
-        $this->success("Parada creada correctamente.");
+        $paradaModel->create($nombre, $latitudValue, $longitudValue);
+
+        $this->success('Parada creada correctamente.');
         $this->redirect('/paradas');
     }
 
@@ -43,7 +65,6 @@ class ParadaController extends BaseController{
         $paradaModel = new Parada();
         $paradas = $paradaModel->find($id);
 
-
         $this->view('paradas/edit.php', ['parada' => $paradas]);
     }
 
@@ -52,12 +73,20 @@ class ParadaController extends BaseController{
         Role::admin();
 
         $paradaModel = new Parada();
+        $id = $_POST['id_parada'] ?? 0;
+        $nombre = trim($_POST['nombre_parada'] ?? '');
+        $latitud = trim($_POST['latitud']);
+        $longitud = trim($_POST['longitud']);
 
-        $paradaModel->update($_POST['id_parada'], trim($_POST['nombre_parada']));
+        if ($id <= 0 || $nombre === '' || $latitud === '' || $longitud === '') {
+            $this->error('Todos los campos son obligatorios.');
+            $this->redirect('/paradas/edit?id=' . $id);
+        }
 
-        $this->success("Parada actualizada correctamente.");
+        $paradaModel->update($id, $nombre, $latitud, $longitud);
+
+        $this->success('Parada actualizada correctamente.');
         $this->redirect('/paradas');
-        exit;
     }
 
     public function delete(){
@@ -69,7 +98,7 @@ class ParadaController extends BaseController{
         $paradaModel = new Parada();
         $paradaModel->delete($id);
 
-        $this->success("Parada eliminada correctamente.");
+        $this->success('Parada eliminada correctamente.');
         $this->redirect('/paradas');
     }
 }
