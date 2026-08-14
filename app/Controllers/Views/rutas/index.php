@@ -41,7 +41,7 @@
                 <td><?= htmlspecialchars($ruta['nombre_ruta'] ?? '') ?></td>
                 <td><?= htmlspecialchars($ruta['origen'] ?? '') ?></td>
                 <td><?= htmlspecialchars($ruta['destino'] ?? '') ?></td>
-                <td><?= htmlspecialchars($ruta['id_empresa'] ?? '') ?></td>
+                <td><?= htmlspecialchars($ruta['nombre_empresa'] ?? $ruta['id_empresa'] ?? '') ?></td>
                 <td>
                     <a href="/Pruebas/BusGo/public/ruta/verRecorrido?id=<?= urlencode($ruta['id_ruta'] ?? '') ?>">
                         Ver recorrido

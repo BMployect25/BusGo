@@ -12,7 +12,11 @@ class Ruta extends BaseModel
     
     public function getAll(): array
     {
-        $stmt = $this->db->query('SELECT id_ruta, nombre_ruta, origen, destino, id_empresa FROM rutas');
+        $stmt = $this->db->query(
+            'SELECT r.id_ruta, r.nombre_ruta, r.origen, r.destino, r.id_empresa, e.nombre AS nombre_empresa
+             FROM rutas r
+             LEFT JOIN empresas e ON r.id_empresa = e.id_empresa'
+        );
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

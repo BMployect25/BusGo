@@ -88,4 +88,35 @@ class RutaParada extends BaseModel
     );
 
     return $stmt->execute([$orden, $idRutaParada]);}
+
+    public function buscarRutas($idOrigen, $idDestino){
+        $stmt = $this->db->prepare(
+            "SELECT
+                r.id_ruta,
+                r.nombre_ruta,
+                r.origen,
+                r.destino
+            FROM rutas r
+            
+            INNER JOIN ruta_paradas rp_origen
+                ON r.id_ruta = rp_origen.id_ruta
+                
+            INNER JOIN ruta_paradas rp_destino
+                ON r.id_ruta = rp_destino.id_ruta
+            
+            WHERE
+                rp_origen.id_parada = ?
+                AND
+                rp_destino.id_parada = ?
+                AND
+                
+                rp_origen.orden_recorrido
+                <
+                rp_destino.orden_recorrido"
+        );
+
+        $stmt->execute([$idOrigen, $idDestino]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

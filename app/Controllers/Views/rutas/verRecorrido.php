@@ -7,10 +7,48 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
+
+    <a href="http://localhost/Pruebas/BusGo/public/rutas"></a>
+
     <div class="container">
         <h1>Recorrido de la Ruta</h1>
 
         <div id="map"></div>
+
+        <?php
+        $paradasSinCoordenadas = [];
+
+        foreach ($recorrido as $parada) {
+            if (
+                $parada['latitud'] === null ||
+                $parada['longitud'] === null ||
+                $parada['latitud'] === '' ||
+                $parada['longitud'] === ''
+            ) {
+                $paradasSinCoordenadas[] = $parada;
+            }
+        }
+        ?>
+        <?php if (!empty($paradasSinCoordenadas)): ?>
+            <div class="alerta-coordenadas">
+
+            <h3>⚠️ Paradas sin coordenadas</h3>
+
+                <p>
+                    Estas paradas no aparecen en el mapa porque todavía no tienen
+                    latitud y longitud:
+                </p>
+
+                <ul>
+                    <?php foreach ($paradasSinCoordenadas as $parada): ?>
+                        <li>
+                            <?= htmlspecialchars($parada['orden_recorrido']) ?>.
+                            <?= htmlspecialchars($parada['nombre_parada']) ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
         <p>
             <a href="/Pruebas/BusGo/public/ruta">Volver a rutas</a>
@@ -22,6 +60,10 @@
 
         <p>
             <a href="/Pruebas/BusGo/public/ruta/createRecorrido?id=<?= urlencode($ruta['id_ruta'] ?? '') ?>">Agregar parada</a>
+        </p>
+
+        <p>
+            <a href="/Pruebas/BusGo/public/paradas">Ver lista de paradas</a>
         </p>
 
         <table border="1">
@@ -54,10 +96,16 @@
         </table>
     </div>
     <script>
-        const recorrido = <?= json_encode($recorrido); ?>;
+        window.recorrido = <?= json_encode($recorrido); ?>;
     </script>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script type="module" src="/Pruebas/BusGo/public/js/mapa/main.js"></script>
+    <script type="module">
+        import { iniciarMapa } from "/Pruebas/BusGo/public/js/mapa/main.js";
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            iniciarMapa(window.recorrido);
+        });
+    </script>
 </body>
 </html>

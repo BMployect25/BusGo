@@ -24,6 +24,16 @@ class RutaController extends BaseController
         $this->view('rutas/index.php', ['rutas' => $rutas]);
     }
 
+    public function publicIndex()
+    {
+        Auth::check();
+
+        $rutaModel = new Ruta();
+        $rutas = $rutaModel->getAll();
+
+        $this->view('rutas/publicIndex.php',['rutas' => $rutas]);
+    }
+
     public function create()
     {
         Auth::check();
@@ -246,5 +256,30 @@ class RutaController extends BaseController
         $this->redirect('/rutas/verRecorrido?id=' . $_POST['id_ruta']);
 
         exit;
+    }
+
+    public function publicVer()
+    {
+        Auth::check();
+
+        $idRuta = $_GET['id'] ?? null;
+
+        if (!$idRuta) {
+            $this->redirect('/rutas');
+            return;
+        }
+
+        $rutaModel = new Ruta();
+
+        $ruta = $rutaModel->find($idRuta);
+
+        if (!$ruta) {
+            $this->error('Ruta no encontrada.');
+        }
+        // Obtener recorrido y mostrar vista pública de la ruta
+        $rutaParadaModel = new RutaParada();
+        $recorrido = $rutaParadaModel->getByRuta($idRuta);
+
+        $this->view('rutas/publicVer.php', ['ruta' => $ruta, 'recorrido' => $recorrido]);
     }
 }

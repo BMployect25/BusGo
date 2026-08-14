@@ -44,8 +44,12 @@
 
     <?php elseif($_SESSION['rol'] === 'cliente'): ?>
 
-        <a href="/Pruebas/BusGo/public/ruta">
+        <a href="/Pruebas/BusGo/public/rutas">
             Ver Rutas
+        </a>
+
+        <a href="/Pruebas/BusGo/public/buscar">
+            Buscar Ruta
         </a>
 
         <a href="/Pruebas/BusGo/public/horarios">

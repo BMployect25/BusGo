@@ -379,5 +379,32 @@ return [
     '/viajes/delete' => [
         'controller' => 'ViajesController',
         'method' => 'delete'
+    ],
+
+    // rutas públicas para consultar
+    '/rutas' => [
+        'controller' => 'RutaController',
+        'method' => 'publicIndex'
+    ],
+
+    '/rutas/ver' => [
+        'controller' => 'RutaController',
+        'method' => 'publicVer'
+    ],
+
+    //Buscar
+    '/buscar' => [
+        'controller' => 'BusquedaController',
+        'method' => 'index'
+    ],
+
+    '/buscar/rutas' => [
+        'controller' => 'BusquedaController',
+        'method' => 'buscar'
+    ],
+
+    '/busqueda/parada-cercana' => [
+        'controller' => 'BusquedaController',
+        'method' => 'paradaCercana'
     ]
 ];

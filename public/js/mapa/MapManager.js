@@ -2,6 +2,7 @@ import { crearMapa } from "./configMapa.js";
 import { crearMarcadores } from "./marcadores.js";
 import { dibujarRecorrido } from "./recorridos.js";
 import { calcularRuta } from "./osrm.js";
+import { obtenerUbicacion } from "./geolocalizacion.js";
 
 export async function iniciarMapa(recorrido) 
 {
@@ -27,23 +28,24 @@ export async function iniciarMapa(recorrido)
         }
     });
 
-    console.log("Puntos enviados a OSRM:");
-    console.log(puntos);
-
     // Calcular ruta mediante OSRM
     const rutaReal = await calcularRuta(puntos);
 
-    console.log("Ruta calculada por OSRM:");
-    console.log(rutaReal);
-
     // Dibujar la ruta únicamente si OSRM devolvió una ruta
     if (rutaReal.length > 0) {
-
         dibujarRecorrido(map, rutaReal, "red");
+    }
 
-    } else {
+    try {
+        const ubicacion = await obtenerUbicacion(map);
 
-        console.error("No se pudo dibujar la ruta");
+        console.log("Ubicación del usuario:", ubicacion);
+
+        if (ubicacion && map) {
+            map.setView([ubicacion.latitud, ubicacion.longitud], 16);
+        }
+    } catch (error) {
+        console.log("No se pudo obtener la ubicación del usuario:", error);
     }
 
     return map;
