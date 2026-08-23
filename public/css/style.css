@@ -23,6 +23,11 @@ table{
     background: white;
 }
 
+.empresa-nombre{
+    color: #173b5c;
+    font-weight: 700;
+}
+
 /*Encabezado*/
 th{
     background: #3d5873;
@@ -396,4 +401,187 @@ input, select{
     border: 3px solid white;
 
     box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.empresa-nombre{
+    color: #173b5c;
+    font-weight: 700;
+}
+
+.busqueda-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.busqueda-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.12);
+}
+
+.busqueda-card h1 {
+    margin-bottom: 10px;
+}
+
+.busqueda-descripcion {
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.btn-ubicacion {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn-ubicacion:hover, .btn-buscar:hover {
+    background: #749dde;
+}
+
+.btn-ubicacion, .btn-buscar {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 6px;
+    background: #1e73be;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.resultados-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.resultados-container h1 {
+    margin-bottom: 30px;
+}
+
+.resultado-seccion {
+    margin-top: 30px;
+}
+
+.resultado-seccion h2 {
+    margin-bottom: 15px;
+}
+
+.ubicacion-card {
+    background: white;
+    padding: 20px;
+    border-left: 5px solid #466989;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.08);
+}
+
+.ubicacion-card h2 {
+    margin-top: 0;
+}
+
+.ruta-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.08);
+}
+
+.ruta-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.ruta-card p {
+    margin: 10px 0;
+}
+
+.ruta-direccion {
+    color: #555;
+}
+
+.btn-secundario {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: #466989;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-secundario:hover {
+    background: #365570;
+}
+
+.mensaje-info {
+    background: #f4f6f8;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 6px;
+    color: #555;
+}
+
+.nueva-busqueda {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+.nueva-busqueda a {
+    color: #466989;
+    font-weight: bold;
+}
+
+
+@media (max-width: 600px) {
+
+    .resultados-container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .resultados-container h1 {
+        font-size: 26px;
+    }
+
+    .resultado-seccion h2 {
+        font-size: 21px;
+    }
+
+    .ruta-card {
+        padding: 16px;
+    }
+
+    .btn-secundario {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
 }

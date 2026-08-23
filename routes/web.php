@@ -400,11 +400,16 @@ return [
 
     '/buscar/rutas' => [
         'controller' => 'BusquedaController',
-        'method' => 'buscar'
+        'method' => 'buscarRutas'
     ],
 
     '/busqueda/parada-cercana' => [
         'controller' => 'BusquedaController',
         'method' => 'paradaCercana'
+    ],
+
+    '/buscar/camino' => [
+        'controller' => 'BusquedaController',
+        'method' => 'camino'
     ]
 ];

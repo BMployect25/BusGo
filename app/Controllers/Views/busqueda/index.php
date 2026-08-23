@@ -1,62 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Buscar rutas - BusGo</title>
+
     <link rel="stylesheet" href="/Pruebas/BusGo/public/css/style.css">
 </head>
 
 <body>
-    
-    <a href="http://localhost/Pruebas/BusGo/public/">
-        Volver
-    </a>
 
-    <h1>¿A dónde quieres ir?</h1>
+    <?php require_once __DIR__ . '/../partials/header.php'; ?>
 
-    <form method="GET" action="/Pruebas/BusGo/public/buscar/rutas">
+    <main class="busqueda-container">
 
-        <label for="origen"> Origen </label>
+        <div class="busqueda-card">
 
-        <select name="origen" id="origen" required>
+            <h1>🔎 Buscar una ruta</h1>
 
-            <option value=""> Selecciona el origen </option>
+            <p class="busqueda-descripcion">
+                Encuentra una ruta desde tu ubicación
+                hasta el lugar donde quieres llegar.
+            </p>
 
-            <?php foreach ($paradas as $parada): ?>
+            <form method="GET" action="/Pruebas/BusGo/public/buscar/rutas">
 
-                <option value="<?= $parada['id_parada'] ?>" >
+                <div class="form-group">
 
-                    <?= htmlspecialchars($parada['nombre_parada']) ?>
+                    <label for="origen">
+                        Tu ubicación
+                    </label>
 
-                </option>
+                    <button type="button" id="usar-ubicacion" class="btn-ubicacion">
+                        📍 Usar mi ubicación
+                    </button>
 
-            <?php endforeach; ?>
+                    <!-- Inputs ocultos para guardar coordenadas -->
+                    <input type="hidden" name="latitud" id="latitud" value="">
+                    <input type="hidden" name="longitud" id="longitud" value="">
 
-        </select>
+                    <!-- Mensaje de estado de ubicación -->
+                    <p id="ubicacion-mensaje" style="margin-top: 10px; font-size: 14px; color: #666;"></p>
 
+                </div>
+                
+                <br>
 
-        <label for="destino"> Destino </label>
+                <div class="form-group">
 
-        <select name="destino" id="destino" required>
+                    <label for="destino">
+                        ¿A dónde quieres ir?
+                    </label>
 
-            <option value=""> Selecciona el destino </option>
+                    <select name="destino" id="destino" required>
 
-            <?php foreach ($paradas as $parada): ?>
+                        <option value="">
+                            Selecciona una parada
+                        </option>
 
-                <option value="<?= $parada['id_parada'] ?>">
+                        <?php foreach ($paradas as $parada): ?>
 
-                    <?= htmlspecialchars($parada['nombre_parada']) ?>
+                            <option value="<?= $parada['id_parada'] ?>">
 
-                </option>
+                                <?= htmlspecialchars( $parada['nombre_parada']) ?>
 
-            <?php endforeach; ?>
+                            </option>
 
-        </select>
+                        <?php endforeach; ?>
 
-        <br><br>
+                    </select>
 
-        <button type="submit"> Buscar rutas </button>
+                </div>
 
-    </form>
+                <br><br>
+                
+                <button type="submit" class="btn-buscar">
+
+                    🔎 Buscar rutas
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <?php require_once __DIR__ . '/../partials/footer.php'; ?>
+
+    <script src="/Pruebas/BusGo/public/js/mapa/busquedaUbicacion.js"></script>
+
 </body>
+
 </html>

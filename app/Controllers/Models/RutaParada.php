@@ -119,4 +119,71 @@ class RutaParada extends BaseModel
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function obtenerRutasPorParada($idParada){
+        $stmt = $this->db->prepare(
+            "SELECT
+                rp.id_ruta,
+                r.nombre_ruta,
+                r.origen,
+                r.destino,
+                rp.orden_recorrido,
+
+                e.id_empresa,
+                e.nombre AS nombre_empresa
+                
+            FROM ruta_paradas rp
+            
+            INNER JOIN rutas r
+                ON rp.id_ruta = r.id_ruta
+
+            LEFT JOIN empresas e
+                ON r.id_empresa = e.id_empresa
+            
+            WHERE rp.id_parada = ?
+
+            ORDER BY r.nombre_ruta
+            "
+        );
+        $stmt->execute([$idParada]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function obtenerRutaEntreParadas($idParadaOrigen, $idParadaDestino)
+    {
+        $stmt = $this->db->prepare(
+            "
+            SELECT
+                r.id_ruta,
+                r.nombre_ruta,
+                r.origen,
+                r.destino,
+
+                e.id_empresa,
+                e.nombre AS nombre_empresa,
+
+                origen.orden_recorrido AS orden_origen,
+                destino.orden_recorrido AS orden_destino
+
+            FROM rutas r
+
+            INNER JOIN empresas e
+                ON r.id_empresa = e.id_empresa
+
+            INNER JOIN ruta_paradas origen
+                ON r.id_ruta = origen.id_ruta
+
+            INNER JOIN ruta_paradas destino
+                ON r.id_ruta = destino.id_ruta
+
+            WHERE origen.id_parada = ?
+                AND destino.id_parada = ?
+                AND origen.orden_recorrido < destino.orden_recorrido
+            
+            ORDER BY origen.orden_recorrido
+            "
+        );
+        $stmt->execute([$idParadaOrigen, $idParadaDestino]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
